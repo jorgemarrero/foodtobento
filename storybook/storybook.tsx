@@ -1,6 +1,7 @@
 import React, { useEffect } from "react"
 import { getStorybookUI, configure } from "@storybook/react-native"
 import SplashScreen from "react-native-splash-screen"
+import { ThemeProvider } from "../app/theme-provider"
 
 declare var module
 
@@ -20,5 +21,9 @@ export const StorybookUIRoot: React.FunctionComponent = () => {
     }
   }, [])
 
-  return <StorybookUI />
+  return (
+    <ThemeProvider>
+      <StorybookUI />
+    </ThemeProvider>
+  )
 }

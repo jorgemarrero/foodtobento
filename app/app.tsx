@@ -5,6 +5,7 @@
 import "./i18n"
 import React, { useState, useEffect } from "react"
 import { AppRegistry, YellowBox } from "react-native"
+import { ThemeProvider } from "./theme-provider"
 import { StatefulNavigator, BackButtonHandler, exitRoutes } from "./navigation"
 import { StorybookUIRoot } from "../storybook"
 import { RootStore, RootStoreProvider, setupRootStore } from "./models/root-store"
@@ -66,7 +67,9 @@ export const App: React.FunctionComponent<{}> = () => {
   return (
     <RootStoreProvider value={rootStore}>
       <BackButtonHandler canExit={canExit}>
-        <StatefulNavigator />
+        <ThemeProvider>
+          <StatefulNavigator />
+        </ThemeProvider>
       </BackButtonHandler>
     </RootStoreProvider>
   )
@@ -80,7 +83,7 @@ const APP_NAME = "foodtobento"
 // Should we show storybook instead of our app?
 //
 // ⚠️ Leave this as `false` when checking into git.
-const SHOW_STORYBOOK = false
+const SHOW_STORYBOOK = true
 
 const RootComponent = SHOW_STORYBOOK && __DEV__ ? StorybookUIRoot : App
 AppRegistry.registerComponent(APP_NAME, () => RootComponent)
