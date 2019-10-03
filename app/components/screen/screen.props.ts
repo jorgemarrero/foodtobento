@@ -1,4 +1,5 @@
-import { ViewStyle, View } from "react-native"
+import { ViewStyle } from "react-native"
+
 import { KeyboardOffsets, ScreenPresets } from "./screen.presets"
 
 export interface ScreenProps {

@@ -1,9 +1,10 @@
+import { flatten, mergeAll } from "ramda"
 import * as React from "react"
-import { TouchableOpacity, TextStyle, ViewStyle, View } from "react-native"
-import { Text } from "../text"
+import { TextStyle, TouchableOpacity, View, ViewStyle } from "react-native"
+
 import { color, spacing } from "../../theme"
+import { Text } from "../text"
 import { CheckboxProps } from "./checkbox.props"
-import { mergeAll, flatten } from "ramda"
 
 const ROOT: ViewStyle = {
   flexDirection: "row",

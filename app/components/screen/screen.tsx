@@ -1,10 +1,10 @@
 import * as React from "react"
 import { KeyboardAvoidingView, Platform, ScrollView, StatusBar, View } from "react-native"
+import { styled } from "react-native-ui-kitten"
 import { SafeAreaView } from "react-navigation"
-import { Layout, styled } from "react-native-ui-kitten"
-import { ScreenProps } from "./screen.props"
+
 import { isNonScrolling, offsets, presets } from "./screen.presets"
-import { LayoutComponent } from "react-native-ui-kitten/ui/layout/layout.component"
+import { ScreenProps } from "./screen.props"
 
 const isIos = Platform.OS === "ios"
 

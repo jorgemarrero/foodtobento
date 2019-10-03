@@ -1,7 +1,8 @@
 import * as React from "react"
-import { TextProps } from "./text.props"
-import { translate } from "../../i18n"
 import { Text as UIKittenText } from "react-native-ui-kitten"
+
+import { translate } from "../../i18n"
+import { TextProps } from "./text.props"
 /**
  * For your text displaying needs.
  *

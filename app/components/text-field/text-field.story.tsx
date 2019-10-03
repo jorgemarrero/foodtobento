@@ -1,13 +1,14 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-native/no-color-literals */
 
-import * as React from "react"
 import { storiesOf } from "@storybook/react-native"
-import { StoryScreen, Story, UseCase } from "../../../storybook/views"
+import * as React from "react"
+import { Alert, TextStyle, ViewStyle } from "react-native"
+import { State } from "react-powerplug"
+
+import { Story, StoryScreen, UseCase } from "../../../storybook/views"
 import { Text } from "../text"
 import { TextField } from "./"
-import { State } from "react-powerplug"
-import { ViewStyle, TextStyle, Alert } from "react-native"
 
 declare var module
 

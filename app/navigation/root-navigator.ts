@@ -1,4 +1,5 @@
 import { createStackNavigator } from "react-navigation"
+
 import { PrimaryNavigator } from "./primary-navigator"
 
 export const RootNavigator = createStackNavigator(

@@ -1,7 +1,8 @@
+import { observer } from "mobx-react"
 import { FunctionComponent, useEffect } from "react"
 import { BackHandler } from "react-native"
-import { observer } from "mobx-react"
 import { NavigationActions } from "react-navigation"
+
 import { useStores } from "../models/root-store"
 
 interface BackButtonHandlerProps {
@@ -37,7 +38,7 @@ export const BackButtonHandler: FunctionComponent<BackButtonHandlerProps> = obse
 
     // Unsubscribe when we're done
     return () => BackHandler.removeEventListener("hardwareBackPress", onBackPress)
-  }, [])
+  }, [navigationStore, props])
 
   // Just render our children, or nothing if they weren't passed.
   return (props as any).children

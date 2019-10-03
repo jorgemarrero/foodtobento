@@ -1,11 +1,12 @@
 import * as React from "react"
-import { View, Image, ViewStyle, TextStyle, ImageStyle, SafeAreaView } from "react-native"
+import { Image, ImageStyle, SafeAreaView, TextStyle, View, ViewStyle } from "react-native"
 import { NavigationScreenProps } from "react-navigation"
-import { Text } from "../../components/text"
+
 import { Button } from "../../components/button"
-import { Screen } from "../../components/screen"
-import { Wallpaper } from "../../components/wallpaper"
 import { Header } from "../../components/header"
+import { Screen } from "../../components/screen"
+import { Text } from "../../components/text"
+import { Wallpaper } from "../../components/wallpaper"
 import { color, spacing } from "../../theme"
 import { bowserLogo } from "./"
 

@@ -1,5 +1,6 @@
 import React from "react"
 import { Image } from "react-native"
+
 import { presets } from "./wallpaper.presets"
 import { WallpaperProps } from "./wallpaper.props"
 

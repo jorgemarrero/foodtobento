@@ -1,5 +1,5 @@
+import { light as lightTheme, mapping } from "@eva-design/eva"
 import React from "react"
-import { mapping, light as lightTheme } from "@eva-design/eva"
 import { ApplicationProvider } from "react-native-ui-kitten"
 
 interface ThemeProviderProps {
