@@ -1,6 +1,7 @@
 import { light as lightTheme, mapping } from "@eva-design/eva"
+import { EvaIconsPack } from "@ui-kitten/eva-icons"
 import React from "react"
-import { ApplicationProvider } from "react-native-ui-kitten"
+import { ApplicationProvider, IconRegistry } from "react-native-ui-kitten"
 
 interface ThemeProviderProps {
   children: React.ReactNode
@@ -8,8 +9,11 @@ interface ThemeProviderProps {
 
 export function ThemeProvider(props: ThemeProviderProps) {
   return (
-    <ApplicationProvider mapping={mapping} theme={lightTheme}>
-      {props.children}
-    </ApplicationProvider>
+    <>
+      <IconRegistry icons={EvaIconsPack} />
+      <ApplicationProvider mapping={mapping} theme={lightTheme}>
+        {props.children}
+      </ApplicationProvider>
+    </>
   )
 }
