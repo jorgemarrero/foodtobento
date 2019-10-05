@@ -1,3 +1,4 @@
+require("../app/components/progress-steps/progress-steps.story")
 require("../app/components/week/week.story")
 require("../app/components/weekday/weekday.story")
 require("../app/components/text/text.story")
