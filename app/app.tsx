@@ -3,6 +3,7 @@
 // In this file, we'll be kicking off our app or storybook.
 
 import "./i18n"
+import "./utils/fixAndroidFont"
 
 import { contains } from "ramda"
 import React, { useEffect, useState } from "react"
@@ -12,7 +13,6 @@ import { StorybookUIRoot } from "../storybook"
 import { RootStore, RootStoreProvider, setupRootStore } from "./models/root-store"
 import { BackButtonHandler, exitRoutes, StatefulNavigator } from "./navigation"
 import { ThemeProvider } from "./theme-provider"
-
 /**
  * Ignore some yellowbox warnings. Some of these are for deprecated functions
  * that we haven't gotten around to replacing yet.
