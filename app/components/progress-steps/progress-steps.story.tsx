@@ -37,7 +37,7 @@ const STEPS: Step[] = [
   },
 ]
 
-function getSteps(completed: number) {
+export function getSteps(completed: number) {
   return STEPS.map((step, index) => ({ ...step, completed: index + 1 <= completed }))
 }
 

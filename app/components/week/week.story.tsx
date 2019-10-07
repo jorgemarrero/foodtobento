@@ -57,7 +57,7 @@ const WEEK_LIST = [
   },
 ]
 
-function getWeekList(active: number): WeekdayProps[] {
+export function getWeekList(active: number): WeekdayProps[] {
   return WEEK_LIST.map((day, index) => ({ ...day, active: active === index }))
 }
 

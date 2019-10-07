@@ -3,13 +3,14 @@ import { KeyboardAvoidingView, Platform, ScrollView, StatusBar, View } from "rea
 import { styled } from "react-native-ui-kitten"
 import { SafeAreaView } from "react-navigation"
 
+import { color } from "../../theme"
 import { isNonScrolling, offsets, presets } from "./screen.presets"
 import { ScreenProps } from "./screen.props"
 
 const isIos = Platform.OS === "ios"
 
 function ScreenWithoutScrolling(props: ScreenProps) {
-  const preset = presets["fixed"]
+  const preset = presets.fixed
   const style = props.style || {}
   const themedStyle = props.themedStyle || {}
   const backgroundStyle = props.backgroundColor ? { backgroundColor: props.backgroundColor } : {}
@@ -21,14 +22,14 @@ function ScreenWithoutScrolling(props: ScreenProps) {
       behavior={isIos ? "padding" : null}
       keyboardVerticalOffset={offsets[props.keyboardOffset || "none"]}
     >
-      <StatusBar barStyle={props.statusBar || "light-content"} />
+      <StatusBar barStyle={props.statusBar || "light-content"} backgroundColor={color.storybookDarkBg}/>
       <Wrapper style={[themedStyle, preset.inner, style]}>{props.children}</Wrapper>
     </KeyboardAvoidingView>
   )
 }
 
 function ScreenWithScrolling(props: ScreenProps) {
-  const preset = presets["scroll"]
+  const preset = presets.scroll
   const style = props.style || {}
   const themedStyle = props.themedStyle || {}
   const backgroundStyle = props.backgroundColor ? { backgroundColor: props.backgroundColor } : {}
@@ -40,7 +41,7 @@ function ScreenWithScrolling(props: ScreenProps) {
       behavior={isIos ? "padding" : null}
       keyboardVerticalOffset={offsets[props.keyboardOffset || "none"]}
     >
-      <StatusBar barStyle={props.statusBar || "light-content"} />
+      <StatusBar barStyle={props.statusBar || "light-content"} backgroundColor={color.storybookDarkBg} />
       <Wrapper style={[preset.outer, backgroundStyle]}>
         <ScrollView
           style={[preset.outer, backgroundStyle]}

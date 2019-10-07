@@ -10,22 +10,31 @@ export const WEEKDAY_SQUARE_SIZE = 104
 
 const ROOT: ViewStyle = {
   width: WEEKDAY_SQUARE_SIZE,
+  marginLeft: spacing[3],
+  shadowColor: "#000",
+  shadowOffset: {
+    width: 0,
+    height: 2,
+  },
+  shadowOpacity: 0.23,
+  shadowRadius: 2.62,
+  elevation: 4,
 }
 const ROOT_INACTIVE: ViewStyle = {
   ...ROOT,
-  opacity: 0.5,
+  opacity: 0.6,
 }
 
 const IMAGE: ImageStyle = {
   width: WEEKDAY_SQUARE_SIZE,
   height: WEEKDAY_SQUARE_SIZE,
   backgroundColor: color.primary,
-  borderRadius: spacing[1],
 }
 const TEXT: TextStyle = {
   alignSelf: "center",
   textAlign: "center",
   paddingTop: spacing[1],
+  color: color.palette.white
 }
 
 /**
@@ -33,10 +42,10 @@ const TEXT: TextStyle = {
  */
 export function Weekday(props: WeekdayProps) {
   // grab the props
-  const { tx, text, style, source, active, ...rest } = props
+  const { tx, text, style, source, active, isLast, ...rest } = props
 
-  const rootStyle: ViewStyle = active ? { ...ROOT, ...style } : { ...ROOT_INACTIVE, ...style }
-
+  let rootStyle: ViewStyle = active ? { ...ROOT, ...style } : { ...ROOT_INACTIVE, ...style }
+  rootStyle = isLast ? { ...rootStyle, marginRight: spacing[3] } : rootStyle
   return (
     <TouchableOpacity style={rootStyle} {...rest}>
       <Image source={source} style={IMAGE} />

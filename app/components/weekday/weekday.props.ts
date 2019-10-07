@@ -21,4 +21,8 @@ export interface WeekdayProps {
   active?: boolean
 
   onPress?: () => void
+
+  isFirst?: boolean
+
+  isLast?: boolean
 }

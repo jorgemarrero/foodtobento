@@ -12,6 +12,13 @@ const SEPARATOR: ViewStyle = {
   width: WEEKDAY_SEPARATOR,
 }
 
+function isFirst(index: number) {
+  return index === 0
+}
+function isLast(length: number, index: number) {
+  return length - 1 === index
+}
+
 function getDayActive(weekdays: WeekdayProps[]) {
   return weekdays.findIndex(day => day.active)
 }
@@ -31,13 +38,21 @@ export function Week(props: WeekProps) {
         }
       }}
       onScroll={() => {}}
+      showsHorizontalScrollIndicator={false}
       renderItem={weekday => {
-        return <Weekday {...weekday.item} />
+        console.tron.log("WEEKDAY", weekday)
+        return (
+          <Weekday
+            {...weekday.item}
+            isFirst={isFirst(weekday.index)}
+            isLast={isLast(weekdays.length, weekday.index)}
+          />
+        )
       }}
-      ItemSeparatorComponent={() => {
-        return <View style={SEPARATOR} />
-      }}
-      style={{ paddingBottom: spacing[4] }}
+      //ItemSeparatorComponent={() => {
+      //  return <View style={SEPARATOR} />
+      // }}
+      style={{ paddingBottom: spacing[4], backgroundColor: "transparent" }}
     />
   )
 }

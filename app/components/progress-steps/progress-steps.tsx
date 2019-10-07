@@ -9,8 +9,12 @@ import { ProgressStepsProps, Step } from "./progress-steps.props"
 const IMAGE_SIZE = 64
 const ICON_SIZE = 32
 
+const LIST: ViewStyle = {
+  backgroundColor: "transparent",
+  paddingHorizontal: spacing[4]
+}
 const CONTAINER: ViewStyle = {
-  paddingHorizontal: 8,
+  padding: 0
 }
 
 const ICON_CONTAINER: ViewStyle = {
@@ -119,5 +123,5 @@ export function ProgressSteps(props: ProgressStepsProps) {
     )
   }
 
-  return <List contentContainerStyle={CONTAINER} data={steps} renderItem={renderItem} />
+  return <List contentContainerStyle={CONTAINER} data={steps} renderItem={renderItem} style={LIST}/>
 }
