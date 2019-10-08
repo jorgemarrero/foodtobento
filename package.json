@@ -139,11 +139,11 @@
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",
     "extends": [
-      "prettier",
       "plugin:@typescript-eslint/recommended",
       "plugin:react/recommended",
       "plugin:react-native/all",
-      "standard"
+      "standard",
+      "plugin:prettier/recommended"
     ],
     "parserOptions": {
       "ecmaFeatures": {
