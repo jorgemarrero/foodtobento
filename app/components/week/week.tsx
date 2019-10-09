@@ -1,15 +1,15 @@
 import React from "react"
-import { View, ViewStyle } from "react-native"
+import { ViewStyle } from "react-native"
 import { List } from "react-native-ui-kitten"
 
-import { spacing } from "../../theme"
+import { color, spacing } from "../../theme"
 import { Weekday, WEEKDAY_SQUARE_SIZE } from "../weekday"
 import { WeekdayProps } from "../weekday/weekday.props"
 import { WeekProps } from "./week.props"
 
 const WEEKDAY_SEPARATOR = spacing[3]
-const SEPARATOR: ViewStyle = {
-  width: WEEKDAY_SEPARATOR,
+const TRANSPARENT: ViewStyle = {
+  backgroundColor: color.transparent,
 }
 
 function isFirst(index: number) {
@@ -39,20 +39,12 @@ export function Week(props: WeekProps) {
       }}
       onScroll={() => {}}
       showsHorizontalScrollIndicator={false}
-      renderItem={weekday => {
-        console.tron.log("WEEKDAY", weekday)
+      renderItem={({ item: weekday, index }: { item: WeekdayProps; index: number }) => {
         return (
-          <Weekday
-            {...weekday.item}
-            isFirst={isFirst(weekday.index)}
-            isLast={isLast(weekdays.length, weekday.index)}
-          />
+          <Weekday {...weekday} isFirst={isFirst(index)} isLast={isLast(weekdays.length, index)} />
         )
       }}
-      //ItemSeparatorComponent={() => {
-      //  return <View style={SEPARATOR} />
-      // }}
-      style={{ paddingBottom: spacing[4], backgroundColor: "transparent" }}
+      style={TRANSPARENT}
     />
   )
 }

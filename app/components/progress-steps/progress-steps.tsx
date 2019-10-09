@@ -6,15 +6,16 @@ import { color, spacing } from "../../theme"
 import { findLastIndex } from "../../utils/findLastIndex"
 import { ProgressStepsProps, Step } from "./progress-steps.props"
 
-const IMAGE_SIZE = 64
-const ICON_SIZE = 32
+const IMAGE_SIZE = 80
+const ICON_SIZE = 40
 
 const LIST: ViewStyle = {
   backgroundColor: "transparent",
-  paddingHorizontal: spacing[4]
+  paddingHorizontal: spacing[4],
 }
 const CONTAINER: ViewStyle = {
-  padding: 0
+  padding: 0,
+  paddingHorizontal: 0,
 }
 
 const ICON_CONTAINER: ViewStyle = {
@@ -22,6 +23,7 @@ const ICON_CONTAINER: ViewStyle = {
   width: IMAGE_SIZE,
   alignSelf: "flex-start",
   marginRight: spacing[2],
+  marginLeft: 0,
 }
 
 const ICON_STEP: ViewStyle = {
@@ -47,17 +49,13 @@ const BACKGROUND: ViewStyle = {
   height: IMAGE_SIZE,
 }
 
-const BACKGROUND_IMAGE: ImageStyle = {
-  borderRadius: spacing[1],
+const ITEM: ViewStyle = {
+  paddingVertical: 0,
+  paddingHorizontal: 0,
 }
 
-const BACKGROUND_IMAGE_OPACITY: ImageStyle = {
-  ...BACKGROUND_IMAGE,
-  opacity: 0.6,
-}
-
-const TEXT_OPACITY: TextStyle = {
-  opacity: 0.6,
+const OPACITY: ImageStyle = {
+  opacity: 0.4,
 }
 
 function isLast(data: any[], index: number) {
@@ -97,16 +95,14 @@ export function ProgressSteps(props: ProgressStepsProps) {
           <ImageBackground
             source={item.source}
             style={BACKGROUND}
-            imageStyle={
-              isNextToComplete(steps, index) ? BACKGROUND_IMAGE : BACKGROUND_IMAGE_OPACITY
-            }
+            imageStyle={isNextToComplete(steps, index) ? {} : OPACITY}
           >
             {item.completed && (
               <View style={ICON_STEP}>
                 <UIIcon
                   name="checkmark-outline"
-                  width={20}
-                  height={20}
+                  width={24}
+                  height={24}
                   tintColor={color.palette.white}
                 />
               </View>
@@ -117,11 +113,25 @@ export function ProgressSteps(props: ProgressStepsProps) {
       )
     }
 
-    const textStyle: TextStyle = isNextToComplete(steps, index) ? {} : TEXT_OPACITY
+    const textStyle: TextStyle = isNextToComplete(steps, index) ? {} : OPACITY
     return (
-      <ListItem {...item} icon={ItemIcon} titleStyle={textStyle} descriptionStyle={textStyle} />
+      <ListItem
+        {...item}
+        icon={ItemIcon}
+        titleStyle={textStyle}
+        descriptionStyle={textStyle}
+        style={ITEM}
+      />
     )
   }
 
-  return <List contentContainerStyle={CONTAINER} data={steps} renderItem={renderItem} style={LIST}/>
+  return (
+    <List
+      contentContainerStyle={CONTAINER}
+      data={steps}
+      renderItem={renderItem}
+      style={LIST}
+      // keyExtractor: TODO
+    />
+  )
 }
