@@ -11,6 +11,7 @@ import { Screen } from "../../components/screen"
 import { Text } from "../../components/text"
 import { Week } from "../../components/week"
 import { getWeekList } from "../../components/week/week.story"
+import { Wrapper } from "../../components/wrapper"
 import { color, spacing } from "../../theme"
 
 const CONTAINER: ViewStyle = {
@@ -34,11 +35,9 @@ const TITLE: TextStyle = {
   color: color.palette.white,
   paddingTop: spacing[5],
   paddingBottom: spacing[3],
-  paddingHorizontal: spacing[4],
 }
 
 const HINT: TextStyle = {
-  paddingHorizontal: spacing[4],
   marginTop: -spacing[3],
   paddingBottom: spacing[4],
   color: color.palette.offWhite,
@@ -47,32 +46,34 @@ const HINT: TextStyle = {
 export interface HomeScreenProps extends NavigationScreenProps<{}> {}
 
 export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
-  const nextScreen = React.useMemo(() => () => props.navigation.navigate("demo"), [
+  const navigateSettings = React.useMemo(() => () => props.navigation.navigate("settings"), [
     props.navigation,
   ])
 
   return (
     <Screen style={CONTAINER} preset="scroll" backgroundColor={color.palette.green}>
-      <TouchableOpacity style={SETTINGS_ICON_BUTTON}>
+      <TouchableOpacity style={SETTINGS_ICON_BUTTON} onPress={navigateSettings}>
         <Icon name="settings-outline" style={SETTINGS_ICON} fill={color.palette.offWhite}></Icon>
       </TouchableOpacity>
-      <Text category="h4" style={{ ...TITLE, marginTop: spacing[5] }}>
-        Semana actual
-      </Text>
+      <Wrapper>
+        <Text category="h4" style={{ ...TITLE, marginTop: spacing[5] }}>
+          Semana actual
+        </Text>
+      </Wrapper>
       <Week weekdays={getWeekList(3)} />
-      <Text category="h4" style={TITLE}>
-        Próxima semana
-      </Text>
-      <ProgressSteps steps={getSteps(2)} />
-      <Text category="h4" style={TITLE}>
-        Menus Food to Bento
-      </Text>
-      <Text category="p2" style={HINT}>
-        Cada semana dos nuevos menus
-      </Text>
-      <View style={{ paddingHorizontal: spacing[4] }}>
+      <Wrapper>
+        <Text category="h4" style={TITLE}>
+          Próxima semana
+        </Text>
+        <ProgressSteps steps={getSteps(2)} />
+        <Text category="h4" style={TITLE}>
+          Menus Food to Bento
+        </Text>
+        <Text category="p2" style={HINT}>
+          Cada semana dos nuevos menus
+        </Text>
         <MenuList menus={MENU_LIST} />
-      </View>
+      </Wrapper>
     </Screen>
   )
 }

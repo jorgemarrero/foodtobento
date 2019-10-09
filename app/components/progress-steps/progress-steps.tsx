@@ -10,8 +10,7 @@ const IMAGE_SIZE = 80
 const ICON_SIZE = 40
 
 const LIST: ViewStyle = {
-  backgroundColor: "transparent",
-  paddingHorizontal: spacing[4],
+  backgroundColor: color.transparent,
 }
 const CONTAINER: ViewStyle = {
   padding: 0,
