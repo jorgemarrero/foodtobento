@@ -73,11 +73,11 @@ export function MenuList(props: MenuListProps) {
   const { menus } = props
 
   function renderMenu({ item }: { item: MenuProps }) {
-    const { tx, text, style, vegan, source, meals, rating: defaultRating } = item
+    const { tx, text, style, vegan, source, meals, rating: defaultRating, onPress } = item
     const rootStyle = { ...ROOT, ...style }
     const rating = getRating(defaultRating)
     return (
-      <TouchableOpacity style={rootStyle}>
+      <TouchableOpacity style={rootStyle} onPress={onPress}>
         <ImageBackground source={source} style={IMAGE}>
           {vegan && (
             <View style={VEGAN}>

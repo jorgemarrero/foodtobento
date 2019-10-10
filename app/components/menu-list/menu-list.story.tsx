@@ -23,6 +23,7 @@ export const MENU_LIST: MenuProps[] = [
       "Berenjenas asiáticas",
     ],
     rating: 5,
+    uuid: "wejfniweofnewifnew",
   },
   {
     text: "De la tierra al plato",
@@ -32,6 +33,7 @@ export const MENU_LIST: MenuProps[] = [
     },
     vegan: true,
     rating: 4.3,
+    uuid: "owefeowkfwefewf",
   },
 ]
 

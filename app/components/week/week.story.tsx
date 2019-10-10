@@ -5,13 +5,14 @@ import { Story, StoryScreen, UseCase } from "../../../storybook/views"
 import { WeekdayProps } from "../weekday/weekday.props"
 import { Week } from "./"
 
-const WEEK_LIST = [
+const WEEK_LIST: WeekdayProps[] = [
   {
     text: "Lunes",
     source: {
       uri:
         "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
     },
+    day: "monday",
   },
   {
     text: "Martes",
@@ -19,6 +20,7 @@ const WEEK_LIST = [
       uri:
         "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80",
     },
+    day: "tuesday",
   },
   {
     text: "Miércoles",
@@ -26,6 +28,7 @@ const WEEK_LIST = [
       uri:
         "https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
     },
+    day: "wednesday",
   },
   {
     text: "Jueves",
@@ -33,6 +36,7 @@ const WEEK_LIST = [
       uri:
         "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
     },
+    day: "thursday",
   },
   {
     text: "Viernes",
@@ -40,6 +44,7 @@ const WEEK_LIST = [
       uri:
         "https://images.unsplash.com/photo-1432139555190-58524dae6a55?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
     },
+    day: "friday",
   },
   {
     text: "Sábado",
@@ -47,6 +52,7 @@ const WEEK_LIST = [
       uri:
         "https://images.unsplash.com/photo-1504544750208-dc0358e63f7f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
     },
+    day: "saturday",
   },
   {
     text: "Domingo",
@@ -54,6 +60,7 @@ const WEEK_LIST = [
       uri:
         "https://images.unsplash.com/photo-1473093226795-af9932fe5856?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
     },
+    day: "sunday",
   },
 ]
 

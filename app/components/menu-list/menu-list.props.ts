@@ -23,6 +23,10 @@ export interface MenuProps {
   rating?: number
 
   meals?: string[]
+
+  uuid?: string
+
+  onPress?: () => void
 }
 
 export interface MenuListProps {

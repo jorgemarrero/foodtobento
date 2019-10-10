@@ -15,11 +15,11 @@ storiesOf("Weekday", module)
         <Weekday
           text="Lunes"
           active
+          day="monday"
           source={{
             uri:
               "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
           }}
-          onPress={() => Alert.alert("Clicked!")}
         />
       </UseCase>
       <UseCase text="No active">
@@ -29,7 +29,7 @@ storiesOf("Weekday", module)
             uri:
               "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
           }}
-          onPress={() => Alert.alert("Clicked!")}
+          day="tuesday"
         />
       </UseCase>
     </Story>
