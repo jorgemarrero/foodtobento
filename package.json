@@ -68,7 +68,7 @@
     "babel-jest": "^24.9.0",
     "detox": "^14.0.1",
     "emotion-theming": "^10.0.14",
-    "eslint": "5.4.0",
+    "eslint": "6.5.1",
     "eslint-config-prettier": "^6.4.0",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-import": "^2.18.2",
@@ -88,6 +88,7 @@
     "patch-package": "6.1.2",
     "postinstall-prepare": "1.0.1",
     "prettier": "1.18.2",
+    "prettier-eslint": "^9.0.0",
     "react-devtools-core": "3.6.3",
     "react-native-dotenv": "^0.2.0",
     "react-powerplug": "1.0.0",
@@ -144,7 +145,10 @@
       "plugin:react/recommended",
       "plugin:react-native/all",
       "standard",
-      "prettier"
+      "prettier",
+      "prettier/@typescript-eslint",
+      "prettier/standard",
+      "prettier/react"
     ],
     "parserOptions": {
       "ecmaFeatures": {
@@ -180,7 +184,6 @@
       "it": false
     },
     "rules": {
-      "no-useless-catch": 0,
       "prettier/prettier": "error",
       "comma-dangle": 0,
       "no-unused-vars": 0,
