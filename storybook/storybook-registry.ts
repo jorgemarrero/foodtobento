@@ -1,3 +1,4 @@
+require("../app/components/menu-steps/menu-steps.story")
 require("../app/components/header/header.story")
 require("../app/components/menu-list/menu-list.story")
 require("../app/components/progress-steps/progress-steps.story")
