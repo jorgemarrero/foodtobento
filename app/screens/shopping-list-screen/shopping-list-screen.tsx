@@ -22,7 +22,7 @@ interface ShoppingListCategory {
   data: ShoppingListCategoryData[]
 }
 
-const SHOPPING_LIST: ShoppingListCategory[] = [
+export const SHOPPING_LIST: ShoppingListCategory[] = [
   {
     title: "Verduleria",
     data: [
