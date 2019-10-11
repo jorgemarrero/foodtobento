@@ -2,7 +2,7 @@ import { observer } from "mobx-react"
 import * as React from "react"
 import { TextStyle, View, ViewStyle } from "react-native"
 import { Button } from "react-native-ui-kitten"
-import { NavigationScreenProps, SectionList } from "react-navigation"
+import { NavigationScreenProps } from "react-navigation"
 
 import { BulletItem } from "../../components/bullet-item"
 import { Header } from "../../components/header"
@@ -32,25 +32,6 @@ const MEAL_LIST: ViewStyle = {
 const TITLE: TextStyle = {
   paddingTop: spacing[4],
   paddingBottom: spacing[3],
-}
-
-const STEP: ViewStyle = {}
-const STEP_NUMBER: ViewStyle = {
-  width: 40,
-  height: 40,
-  borderRadius: 40,
-  backgroundColor: color.palette.greenTransparent,
-  justifyContent: "center",
-  alignItems: "center",
-  marginTop: spacing[5],
-  marginBottom: spacing[2],
-}
-const FIRST_STEP_NUMBER: ViewStyle = {
-  ...STEP_NUMBER,
-  marginTop: 0,
-}
-const STEP_NUMBER_TEXT: TextStyle = {
-  color: color.palette.white,
 }
 
 const CONGRATULATIONS: TextStyle = {
