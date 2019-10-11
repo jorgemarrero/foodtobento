@@ -1,5 +1,5 @@
 import * as React from "react"
-import { ImageStyle, View, ViewStyle } from "react-native"
+import { ImageStyle, TextStyle, View, ViewStyle } from "react-native"
 
 import { color, spacing } from "../../theme"
 import { Text } from "../text"
@@ -21,6 +21,10 @@ const BULLET: ImageStyle = {
   marginRight: spacing[3],
 }
 
+const TEXT: TextStyle = {
+  flex: 1,
+}
+
 export interface BulletItemProps extends TextProps {
   color?: string
 }
@@ -32,7 +36,7 @@ export function BulletItem(props: BulletItemProps) {
   return (
     <View style={BULLET_ITEM}>
       <View style={bulletStyle}></View>
-      <Text {...props} />
+      <Text style={TEXT} {...props} />
     </View>
   )
 }
