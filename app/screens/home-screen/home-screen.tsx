@@ -1,6 +1,6 @@
-import React, { useMemo } from "react"
-import { Alert,TextStyle, TouchableOpacity, ViewStyle } from "react-native"
-import { Icon } from "react-native-ui-kitten"
+import React, { useMemo, useState } from "react"
+import { TextStyle, TouchableOpacity, ViewStyle } from "react-native"
+import { Button, Icon, Layout, Modal } from "react-native-ui-kitten"
 import { NavigationScreenProps } from "react-navigation"
 
 import { MenuList } from "../../components/menu-list"
@@ -52,6 +52,8 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
     props.navigation,
   ])
 
+  const [startWeekModalVisible, setStartWeekModalVisible] = useState(false)
+
   function addOnPressToWeekdays(weekdays: WeekdayProps[]): WeekdayProps[] {
     return weekdays.map(weekday => {
       return {
@@ -65,7 +67,6 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
 
   function addOnPressToMenus(menus: MenuProps[]): MenuProps[] {
     return menus.map(menu => {
-      console.tron.log("MENU", menu)
       return {
         ...menu,
         onPress: menu.uuid
@@ -73,6 +74,10 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
           : () => {},
       }
     })
+  }
+
+  function setModalVisible() {
+    setStartWeekModalVisible(value => !value)
   }
 
   const STEPS: Step[] = [
@@ -98,7 +103,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
     {
       title: "3. Empezar la semana",
       description: "Nosotros te guiaremos día a día para que cumplas tu objetivo",
-      onPress: useMemo(() => () => Alert.alert("Sure?"), []),
+      onPress: useMemo(() => setModalVisible, []),
       source: {
         uri:
           "https://images.unsplash.com/photo-1519248494489-1e9f5586bf10?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
@@ -122,6 +127,17 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
           Próxima semana
         </Text>
         <ProgressSteps steps={STEPS} />
+        <Modal
+          visible={startWeekModalVisible}
+          allowBackdrop
+          backdropStyle={{ backgroundColor: "black", opacity: 0.5 }}
+          onBackdropPress={setModalVisible}
+        >
+          <Layout>
+            <Text>Sure?</Text>
+            <Button onPress={setModalVisible}>Hide hodal</Button>
+          </Layout>
+        </Modal>
         <Text category="h4" style={TITLE}>
           Menus Food to Bento
         </Text>
