@@ -27,6 +27,9 @@
   "dependencies": {
     "@eva-design/eva": "^1.2.0",
     "@react-native-community/async-storage": "^1.5.1",
+    "@react-native-firebase/app": "^6.0.1",
+    "@react-native-firebase/auth": "^6.0.1",
+    "@react-native-firebase/firestore": "^6.0.1",
     "@ui-kitten/eva-icons": "^4.2.0",
     "apisauce": "1.0.3",
     "i18n-js": "^3.0.11",
