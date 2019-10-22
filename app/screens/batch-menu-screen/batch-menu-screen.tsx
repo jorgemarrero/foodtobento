@@ -6,13 +6,11 @@ import { NavigationScreenProps } from "react-navigation"
 
 import { BulletItem } from "../../components/bullet-item"
 import { Header } from "../../components/header"
-import { MENU_LIST } from "../../components/menu-list/menu-list.story"
 import { Screen } from "../../components/screen"
 import { Text } from "../../components/text"
 import { Wrapper } from "../../components/wrapper"
-// import { useStores } from "../../models/root-store"
+import { useStores } from "../../models/root-store"
 import { color, spacing } from "../../theme"
-import { SHOPPING_LIST } from "../shopping-list-screen"
 
 export interface BatchMenuScreenProps extends NavigationScreenProps<{}> {}
 
@@ -61,27 +59,25 @@ const BUTTON_TEXT: TextStyle = {
 }
 
 export const BatchMenuScreen: React.FunctionComponent<BatchMenuScreenProps> = observer(props => {
-  // const { someStore } = useStores()
   const goBack = React.useMemo(() => () => props.navigation.goBack(), [props.navigation])
+  const {
+    menuStore: { selectedMenu },
+  } = useStores()
 
   return (
     <>
-      <Header text="Tentaciones marinas" onPress={goBack} />
+      <Header text={selectedMenu.name} onPress={goBack} />
       <Screen style={ROOT} preset="scroll">
         <Wrapper>
-          <Text style={DESCRIPTION}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nibh libero, tristique
-            eget euismod a, dapibus a felis. Donec et interdum nulla, non porta mauris. Morbi
-            accumsan ipsum libero:
-          </Text>
+          <Text style={DESCRIPTION}>{selectedMenu.description}</Text>
           <View style={MEAL_LIST}>
-            {MENU_LIST[0].meals.map(meal => {
+            {selectedMenu.meals.map(meal => {
               return <BulletItem key={meal} text={meal}></BulletItem>
             })}
           </View>
           <Text text="Listado de ingredientes" category="h6" style={TITLE} />
           <View style={MEAL_LIST}>
-            {SHOPPING_LIST.map((category, index) => {
+            {selectedMenu.shoppingList.map((category, index) => {
               return (
                 <View key={category.title}>
                   <Text category="s1" style={index === 0 ? FIRST_SUBTITLE : SUBTITLE}>
@@ -94,7 +90,7 @@ export const BatchMenuScreen: React.FunctionComponent<BatchMenuScreenProps> = ob
               )
             })}
           </View>
-          <Text text="Empezar" category="h6" style={TITLE_WITH_TEXT} />
+          <Text text="Empezar 👨‍🍳👩‍🍳" category="h6" style={TITLE_WITH_TEXT} />
           <Text>
             Si te ha gustado esta propuesta y te sientes cómodo con los ingredientes, haz click en
             "Seleccionar este batch cooking" y te guiaremos hasta que tengas todos los tuppers de tu

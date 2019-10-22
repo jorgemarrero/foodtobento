@@ -68,11 +68,13 @@ export const CookingRecipeScreen: React.FunctionComponent<CookingRecipeScreenPro
             <Text text="Preparativos" category="h6" style={TITLE} />
             <Text>Asegúrate de tener esto preparado antes de empezar a cocinar:</Text>
             <View style={MEAL_LIST}>
-              {["Cocina limpia", "Horno", "Tabla de cortar", "Ingredientes accesibles"].map(
-                meal => {
-                  return <BulletItem key={meal} text={meal} color={color.dim}></BulletItem>
-                },
-              )}
+              {[
+                "Cocina limpia y ordenada",
+                "Saca todos los ingredientes",
+                "Prepara los siguientes utensilios: 2 bandejas de horno, 1 bandeja para gratinado, 1 pasapurés, 1 sartén, 1 olla grande, 1 olla mediana, 1 batidora",
+              ].map(meal => {
+                return <BulletItem key={meal} text={meal} color={color.dim}></BulletItem>
+              })}
             </View>
             <Text text="Pasos" category="h6" style={TITLE} />
             <MenuSteps

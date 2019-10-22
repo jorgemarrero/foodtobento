@@ -10,7 +10,7 @@ declare var module
 
 export const MENU_LIST: MenuProps[] = [
   {
-    text: "Tentación marina",
+    name: "Tentación marina",
     source: {
       uri:
         "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
@@ -23,17 +23,17 @@ export const MENU_LIST: MenuProps[] = [
       "Berenjenas asiáticas",
     ],
     rating: 5,
-    uuid: "wejfniweofnewifnew",
+    id: "wejfniweofnewifnew",
   },
   {
-    text: "De la tierra al plato",
+    name: "De la tierra al plato",
     source: {
       uri:
         "https://images.unsplash.com/photo-1473093226795-af9932fe5856?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
     },
     vegan: true,
     rating: 4.3,
-    uuid: "owefeowkfwefewf",
+    id: "owefeowkfwefewf",
   },
 ]
 

@@ -4388,10 +4388,10 @@ iconv-lite@0.4.24, iconv-lite@^0.4.17, iconv-lite@^0.4.24, iconv-lite@^0.4.4, ic
   dependencies:
     safer-buffer ">= 2.1.2 < 3"
 
-ignite-bowser@^4.7.1:
-  version "4.7.1"
-  resolved "https://registry.yarnpkg.com/ignite-bowser/-/ignite-bowser-4.7.1.tgz#768e70edec28b6c92ccdcd42798800c78845c25c"
-  integrity sha512-V/6OTvXrngAjqzUsfpP6QqtTTYd1k8wBBIuUvoJQ7Yu9WOagyW5rm6UUYnAfLGywgTQWYtWx2loqv2DcxLUUlQ==
+ignite-bowser@^4.8.1:
+  version "4.8.1"
+  resolved "https://registry.yarnpkg.com/ignite-bowser/-/ignite-bowser-4.8.1.tgz#6c5d557a0eea5d47fec4b56e958b9e55e4d87ff5"
+  integrity sha512-ZTxcFUkgrg2Pc1+tVBFYcN5ovt6NXH1phqk8s7I7NB/3e4klFCiigRSx+tWq9q5KhZPwJNC56ce74EqUOH00Cg==
   dependencies:
     ramda "^0.26.1"
     read-pkg-up "^6.0.0"

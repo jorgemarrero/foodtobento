@@ -6,25 +6,25 @@ export interface MenuProps {
    */
   style?: ViewStyle
 
-  source: ImageSourcePropType
+  source?: ImageSourcePropType
 
   vegan?: boolean
 
   /**
    * Text which is looked up via i18n.
    */
-  tx?: string
+  nameTx?: string
 
   /**
-   * The text to display if not using `tx` or nested components.
+   * The name to display if not using `tx` or nested components.
    */
-  text?: string
+  name?: string
 
   rating?: number
 
   meals?: string[]
 
-  uuid?: string
+  id?: string
 
   onPress?: () => void
 }
@@ -35,5 +35,5 @@ export interface MenuListProps {
    */
   style?: ViewStyle
 
-  menus: Menu[]
+  menus: MenuProps[]
 }

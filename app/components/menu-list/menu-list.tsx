@@ -1,5 +1,13 @@
 import * as React from "react"
-import { Image, ImageBackground, ImageStyle, TextStyle, View, ViewStyle } from "react-native"
+import {
+  Image,
+  ImageBackground,
+  ImageSourcePropType,
+  ImageStyle,
+  TextStyle,
+  View,
+  ViewStyle,
+} from "react-native"
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler"
 
 import { color, spacing } from "../../theme"
@@ -73,12 +81,16 @@ export function MenuList(props: MenuListProps) {
   const { menus } = props
 
   function renderMenu({ item }: { item: MenuProps }) {
-    const { tx, text, style, vegan, source, meals, rating: defaultRating, onPress } = item
+    const { nameTx, name, style, vegan, source, meals, rating: defaultRating, onPress } = item
     const rootStyle = { ...ROOT, ...style }
     const rating = getRating(defaultRating)
+    const actualSource: ImageSourcePropType = source || {
+      uri:
+        "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
+    }
     return (
       <TouchableOpacity style={rootStyle} onPress={onPress}>
-        <ImageBackground source={source} style={IMAGE}>
+        <ImageBackground source={actualSource} style={IMAGE}>
           {vegan && (
             <View style={VEGAN}>
               <Image source={veganImage} style={VEGAN_IMAGE} />
@@ -87,7 +99,7 @@ export function MenuList(props: MenuListProps) {
         </ImageBackground>
         <View style={FOOTER}>
           <View style={DESCRIPTION}>
-            <Text tx={tx} text={text} style={TITLE} category="p2" />
+            <Text tx={nameTx} text={name} style={TITLE} category="p2" />
             <Text text={" - "} category="p2" />
             <Text text={`★ ${rating.text}`} style={{ color: rating.color }} category="p2" />
           </View>
