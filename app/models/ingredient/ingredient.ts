@@ -9,6 +9,7 @@ export const IngredientModel = types.model("Ingredient").props({
   meat: types.optional(types.array(types.string), []),
   miscellaneous: types.optional(types.array(types.string), []),
   vegetables: types.optional(types.array(types.string), []),
+  fruit: types.optional(types.array(types.string), []),
 })
 
 type IngredientType = Instance<typeof IngredientModel>

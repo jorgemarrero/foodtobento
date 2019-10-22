@@ -2,7 +2,7 @@ import firestore, { FirebaseFirestoreTypes } from "@react-native-firebase/firest
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
 
 import { withRootStore } from "../extensions"
-import { MenuModel } from "../menu/menu"
+import { MenuModel, MenuSnapshot } from "../menu/menu"
 
 interface Day {
   index: number
@@ -15,8 +15,12 @@ interface Day {
 }
 
 enum IngredientsCategory {
+  DAIRY = "dairy",
+  FISH = "fish",
   MEAT = "meat",
-  FRUIT = "fruits",
+  MISCELLANEOUS = "miscellaneous",
+  VEGETABLES = "vegetables",
+  FRUIT = "fruit",
 }
 interface Menu {
   rating: number
@@ -52,16 +56,13 @@ export const MenuStoreModel = types
       const id = self.rootStore.navigationStore.getIdParam()
       return self.menus.find(menu => menu.id === id)
     },
-  })) // eslint-disable-line @typescript-eslint/no-unused-vars
+  }))
   .actions(self => ({
-    setData(menus) {
-      self.menus = menus
+    setData(menus: MenuSnapshot[]) {
+      self.menus.replace(menus as any)
     },
   }))
   .actions(self => ({
-    setData(menus) {
-      self.menus = menus
-    },
     async getData() {
       const menusSnapshot = await firestore()
         .collection("menus")
