@@ -1,4 +1,4 @@
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import append from "ramda/es/append"
 import flatten from "ramda/es/flatten"
 import includes from "ramda/es/includes"
@@ -28,7 +28,7 @@ export const SHOPPING_LIST: ShoppingListCategory[] = [
     data: [
       "5 cebollas",
       "10 patatas nuevas medianas",
-      "8 o10 tomates de pera",
+      "8 o 10 tomates de pera",
       "4 tomates para ensalada",
       "2 cabezas de ajos",
       "4 limones",

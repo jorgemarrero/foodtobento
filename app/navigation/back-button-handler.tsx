@@ -1,4 +1,4 @@
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import { FunctionComponent, useEffect } from "react"
 import { BackHandler } from "react-native"
 import { NavigationActions } from "react-navigation"
