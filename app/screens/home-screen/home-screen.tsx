@@ -1,4 +1,3 @@
-import firestore, { FirebaseFirestoreTypes } from "@react-native-firebase/firestore"
 import { observer } from "mobx-react-lite"
 import React, { Fragment, useEffect, useMemo, useState } from "react"
 import { TextStyle, TouchableOpacity, View, ViewStyle } from "react-native"
@@ -7,7 +6,6 @@ import { NavigationScreenProps } from "react-navigation"
 
 import { MenuList } from "../../components/menu-list"
 import { MenuProps } from "../../components/menu-list/menu-list.props"
-import { MENU_LIST } from "../../components/menu-list/menu-list.story"
 import { ProgressSteps } from "../../components/progress-steps"
 import { Step } from "../../components/progress-steps/progress-steps.props"
 import { Screen } from "../../components/screen"
@@ -18,22 +16,6 @@ import { WeekdayProps } from "../../components/weekday/weekday.props"
 import { Wrapper } from "../../components/wrapper"
 import { useStores } from "../../models/root-store"
 import { color, spacing } from "../../theme"
-
-interface Meals {
-  meals?: FirebaseFirestoreTypes.DocumentReference[]
-}
-
-enum IngredientsCategory {
-  MEAT = "meat",
-  FRUIT = "fruits",
-}
-interface Menu {
-  days?: Meals[]
-  rating: number
-  ingredients: {
-    [category in IngredientsCategory]: string[]
-  }
-}
 
 const CONTAINER: ViewStyle = {
   backgroundColor: color.palette.green,
@@ -95,6 +77,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = observer(pro
     return menus.map(menu => {
       return {
         ...menu,
+        meals: menu.meals, // Necessary because it's a mst view
         onPress: menu.id ? () => props.navigation.navigate("batchMenu", { id: menu.id }) : () => {},
       }
     })

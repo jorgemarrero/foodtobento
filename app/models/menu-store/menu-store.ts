@@ -11,8 +11,9 @@ interface Day {
     // eslint-disable-next-line camelcase
     meal_ref: FirebaseFirestoreTypes.DocumentReference
     conservation: string
+    meal: string
   }
-  nextDat: string
+  nextDay: string
 }
 
 enum IngredientsCategory {
@@ -95,6 +96,11 @@ export const MenuStoreModel = types
     },
     completeShopping() {
       if (self.nextWeekStep === 1) {
+        self.nextWeekStep += 1
+      }
+    },
+    completeCooking() {
+      if (self.nextWeekStep === 2) {
         self.nextWeekStep += 1
       }
     },

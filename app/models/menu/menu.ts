@@ -2,6 +2,7 @@ import { Instance, SnapshotOut, types } from "mobx-state-tree"
 import toPairs from "ramda/es/toPairs"
 
 import { translate } from "../../i18n"
+import { DayModel } from "../day"
 import { IngredientModel } from "../ingredient"
 
 /**
@@ -15,12 +16,11 @@ export const MenuModel = types
     ingredients: IngredientModel,
     vegan: types.boolean,
     preparation: types.array(types.string),
-    meals: types.array(types.string),
     steps: types.array(types.string),
     // date: types.Date,
     description: types.string,
     name: types.string,
-    // days: types.array(DayModel)
+    days: types.array(DayModel),
   })
   .views(self => ({
     get shoppingList() {
@@ -35,6 +35,17 @@ export const MenuModel = types
         .filter(category => {
           return category.data.length > 0
         })
+    },
+    get meals() {
+      return self.days.map(day => day.lunch.meal)
+    },
+    get mealsFridge() {
+      return self.days.filter(day => day.lunch.conservation === "fridge").map(day => day.lunch.meal)
+    },
+    get mealsFreezer() {
+      return self.days
+        .filter(day => day.lunch.conservation === "freezer")
+        .map(day => day.lunch.meal)
     },
   }))
 
