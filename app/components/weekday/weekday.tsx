@@ -58,7 +58,7 @@ const TEXT_INACTIVE: TextStyle = {
  */
 export function Weekday(props: WeekdayProps) {
   // grab the props
-  const { tx, text, style, source, active, isLast, ...rest } = props
+  const { tx, text, style, source, active, isLast, day, ...rest } = props
 
   let rootStyle: ViewStyle = { ...ROOT, ...style }
   rootStyle = isLast ? { ...rootStyle, marginRight: spacing[3] } : rootStyle
@@ -68,7 +68,12 @@ export function Weekday(props: WeekdayProps) {
       {!active && <View style={INACTIVE}></View>}
       <Image source={source} style={IMAGE} />
       <View style={TEXT_WRAPPER}>
-        <Text category="s2" style={active ? TEXT : TEXT_INACTIVE} text={text} tx={tx}></Text>
+        <Text
+          category="s2"
+          style={active ? TEXT : TEXT_INACTIVE}
+          text={text}
+          tx={`weekdays.${day}`}
+        ></Text>
       </View>
     </TouchableOpacity>
   )

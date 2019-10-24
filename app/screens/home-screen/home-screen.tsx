@@ -50,6 +50,12 @@ const HINT: TextStyle = {
   color: color.palette.offWhite,
 }
 
+const MODAL: ViewStyle = {
+  minWidth: 200,
+  padding: spacing[4],
+  justifyContent: "space-between",
+}
+
 export interface HomeScreenProps extends NavigationScreenProps<{}> {}
 
 export const HomeScreen: React.FunctionComponent<HomeScreenProps> = observer(props => {
@@ -59,7 +65,15 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = observer(pro
 
   const [startWeekModalVisible, setStartWeekModalVisible] = useState(false)
   const {
-    menuStore: { getData: getMenus, menus, hasNextWeek, nextWeekStep },
+    menuStore: {
+      getData: getMenus,
+      menus,
+      hasNextWeek,
+      nextWeekStep,
+      completeSteps,
+      hasCurrentWeek,
+      currentWeekMenuDays,
+    },
   } = useStores()
 
   function addOnPressToWeekdays(weekdays: WeekdayProps[]): WeekdayProps[] {
@@ -111,7 +125,13 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = observer(pro
     {
       title: "3. Empezar la semana",
       description: "Nosotros te guiaremos día a día para que cumplas tu objetivo",
-      onPress: useMemo(() => setModalVisible, []),
+      onPress: useMemo(
+        () => () => {
+          // TODO: Check that we are in steps 3 first
+          completeSteps()
+        },
+        [completeSteps],
+      ),
       completed: nextWeekStep > 3,
       source: {
         uri:
@@ -123,19 +143,21 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = observer(pro
   useEffect(() => {
     getMenus()
   }, [getMenus])
-
+  console.tron.log(currentWeekMenuDays)
   return (
     <Screen style={CONTAINER} preset="scroll" backgroundColor={color.palette.green}>
       <TouchableOpacity style={SETTINGS_ICON_BUTTON} onPress={navigateSettings}>
-        <Icon name="settings-outline" style={SETTINGS_ICON} fill={color.palette.offWhite}></Icon>
+        <Icon name="info-outline" style={SETTINGS_ICON} fill={color.palette.offWhite}></Icon>
       </TouchableOpacity>
       <Wrapper>
         <View style={TOP_SEPARATOR}></View>
-        {/*         <Text category="h4" style={TITLE}>
-          Semana actual
-        </Text> */}
+        {hasCurrentWeek && (
+          <Text category="h4" style={TITLE}>
+            Semana actual
+          </Text>
+        )}
       </Wrapper>
-      {/*       <Week weekdays={addOnPressToWeekdays(getWeekList(3))} /> */}
+      {hasCurrentWeek && <Week weekdays={addOnPressToWeekdays(currentWeekMenuDays)} />}
       <Wrapper>
         {hasNextWeek && (
           <Fragment>
@@ -149,7 +171,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = observer(pro
               backdropStyle={{ backgroundColor: "black", opacity: 0.5 }}
               onBackdropPress={setModalVisible}
             >
-              <Layout>
+              <Layout style={MODAL}>
                 <Text>Sure?</Text>
                 <Button onPress={setModalVisible}>Hide hodal</Button>
               </Layout>

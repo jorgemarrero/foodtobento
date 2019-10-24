@@ -40,6 +40,13 @@ interface Menu {
   id: string
 }
 
+interface WeekDay {
+  day: "monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday" | "sunday"
+  source?: {
+    uri: string
+  }
+}
+
 /**
  * Model description here for TypeScript hints.
  */
@@ -50,11 +57,15 @@ export const MenuStoreModel = types
     menus: types.optional(types.array(MenuModel), []),
     nextWeekMenuId: types.optional(types.string, ""),
     nextWeekStep: types.optional(types.number, 0),
+    currentWeekMenuId: types.optional(types.string, ""),
     ingredientsSelected: types.optional(types.array(types.string), []),
   })
   .views(self => ({
     get hasNextWeek() {
       return self.nextWeekMenuId !== ""
+    },
+    get hasCurrentWeek() {
+      return self.currentWeekMenuId !== ""
     },
     get selectedMenu() {
       const id = self.rootStore.navigationStore.getIdParam()
@@ -62,6 +73,66 @@ export const MenuStoreModel = types
     },
     get nextWeekMenu() {
       return self.menus.find(menu => menu.id === self.nextWeekMenuId)
+    },
+    get currentWeekMenu() {
+      return self.menus.find(menu => menu.id === self.currentWeekMenuId)
+    },
+    get currentWeekMenuDays() {
+      const WEEK_DAYS: WeekDay[] = [
+        {
+          day: "sunday",
+        },
+        {
+          day: "monday",
+          source: {
+            uri:
+              "https://images.unsplash.com/photo-1557800636-894a64c1696f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
+          },
+        },
+        {
+          day: "tuesday",
+          source: {
+            uri:
+              "https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
+          },
+        },
+        {
+          day: "wednesday",
+          source: {
+            uri:
+              "https://images.unsplash.com/photo-1561929540-8c0008aaab6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
+          },
+        },
+        {
+          day: "thursday",
+          source: {
+            uri:
+              "https://images.unsplash.com/photo-1463740839922-2d3b7e426a56?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
+          },
+        },
+        {
+          day: "friday",
+          source: {
+            uri:
+              "https://images.unsplash.com/photo-1481349518771-20055b2a7b24?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
+          },
+        },
+        {
+          day: "saturday",
+        },
+      ]
+      return self.menus
+        .find(menu => menu.id === self.currentWeekMenuId)
+        .days.sort((a, b) => (a.index > b.index ? 1 : -1))
+        .map(day => {
+          const date = new Date()
+          return {
+            ...day,
+            source: WEEK_DAYS[day.index] && WEEK_DAYS[day.index].source,
+            day: WEEK_DAYS[day.index] ? WEEK_DAYS[day.index].day : null,
+            active: date.getDay() === day.index,
+          }
+        })
     },
   }))
   .views(self => ({
@@ -104,6 +175,11 @@ export const MenuStoreModel = types
         self.nextWeekStep += 1
       }
     },
+    completeSteps() {
+      self.nextWeekStep = 0
+      self.currentWeekMenuId = self.nextWeekMenuId
+      self.nextWeekMenuId = ""
+    },
   }))
   .actions(self => ({
     async getData() {
@@ -122,13 +198,6 @@ export const MenuStoreModel = types
           data.days = daysSnapshot.docs.map(doc => {
             return doc.data() as Day
           })
-          data.meals = [
-            "Potaje de lentejas",
-            "Pollo al limón",
-            "Ceviche",
-            "Caracoles en salsa",
-            "Berenjenas asiáticas",
-          ]
           return data
         }),
       )

@@ -1,15 +1,11 @@
-import { FirebaseFirestoreTypes } from "@react-native-firebase/firestore"
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
+
 /**
  * Model description here for TypeScript hints.
  */
-export const LunchModel = types
-  .model("Lunch")
-  .props({
-    conservation: types.enumeration(["fridge", "freezer"]),
-    meal: types.string,
-    meal_ref: types.frozen<FirebaseFirestoreTypes.DocumentReference>(),
-  })
+export const UserStoreModel = types
+  .model("UserStore")
+  .props({})
   .views(self => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
   .actions(self => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
 
@@ -21,7 +17,7 @@ export const LunchModel = types
   *  .postProcessSnapshot(omit(["password", "socialSecurityNumber", "creditCardNumber"]))
   */
 
-type LunchType = Instance<typeof LunchModel>
-export interface Lunch extends LunchType {}
-type LunchSnapshotType = SnapshotOut<typeof LunchModel>
-export interface LunchSnapshot extends LunchSnapshotType {}
+type UserStoreType = Instance<typeof UserStoreModel>
+export interface UserStore extends UserStoreType {}
+type UserStoreSnapshotType = SnapshotOut<typeof UserStoreModel>
+export interface UserStoreSnapshot extends UserStoreSnapshotType {}
