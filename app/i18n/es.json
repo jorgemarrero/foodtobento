@@ -1,0 +1,15 @@
+{
+  "common": {
+    "ok": "OK",
+    "cancel": "Cancelar",
+    "back": "Atrás"
+  },
+  "ingredients": {
+    "dairy": "Despensa",
+    "fish": "Pescado",
+    "meat": "Carne",
+    "miscellaneous": "Otros",
+    "vegetables": "Verduras",
+    "fruit": "Frutas"
+  }
+}

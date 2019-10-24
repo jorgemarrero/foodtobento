@@ -1,5 +1,6 @@
 import firestore, { FirebaseFirestoreTypes } from "@react-native-firebase/firestore"
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
+import { flatten } from "ramda"
 
 import { withRootStore } from "../extensions"
 import { MenuModel, MenuSnapshot } from "../menu/menu"
@@ -46,20 +47,56 @@ export const MenuStoreModel = types
   .extend(withRootStore)
   .props({
     menus: types.optional(types.array(MenuModel), []),
-    active: types.optional(types.string, ""),
+    nextWeekMenuId: types.optional(types.string, ""),
+    nextWeekStep: types.optional(types.number, 0),
+    ingredientsSelected: types.optional(types.array(types.string), []),
   })
   .views(self => ({
-    get hasActiveMenu() {
-      return self.active !== ""
+    get hasNextWeek() {
+      return self.nextWeekMenuId !== ""
     },
     get selectedMenu() {
       const id = self.rootStore.navigationStore.getIdParam()
       return self.menus.find(menu => menu.id === id)
     },
+    get nextWeekMenu() {
+      return self.menus.find(menu => menu.id === self.nextWeekMenuId)
+    },
+  }))
+  .views(self => ({
+    get hasAllIngredients() {
+      return (
+        self.ingredientsSelected.length ===
+        flatten(
+          self.nextWeekMenu.shoppingList.map(category => {
+            return category.data
+          }),
+        ).length
+      )
+    },
+  }))
+  .actions(self => ({
+    addIngredientSelected(ingredient: string) {
+      self.ingredientsSelected.replace([...new Set([...self.ingredientsSelected, ingredient])])
+    },
+    removeIngredientSelected(ingredient: string) {
+      self.ingredientsSelected.replace(
+        self.ingredientsSelected.filter(ingredientSelected => ingredientSelected !== ingredient),
+      )
+    },
   }))
   .actions(self => ({
     setData(menus: MenuSnapshot[]) {
       self.menus.replace(menus as any)
+    },
+    setNextWeek(id: string) {
+      self.nextWeekMenuId = id
+      self.nextWeekStep = 1
+    },
+    completeShopping() {
+      if (self.nextWeekStep === 1) {
+        self.nextWeekStep += 1
+      }
     },
   }))
   .actions(self => ({

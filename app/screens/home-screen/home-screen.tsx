@@ -77,7 +77,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = observer(pro
 
   const [startWeekModalVisible, setStartWeekModalVisible] = useState(false)
   const {
-    menuStore: { getData: getMenus, menus, hasActiveMenu },
+    menuStore: { getData: getMenus, menus, hasNextWeek, nextWeekStep },
   } = useStores()
 
   function addOnPressToWeekdays(weekdays: WeekdayProps[]): WeekdayProps[] {
@@ -109,7 +109,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = observer(pro
       title: "1. Haz la compra",
       description: "Online con nosotros o en el súper",
       onPress: useMemo(() => () => props.navigation.navigate("shoppingList"), [props.navigation]),
-      completed: true,
+      completed: nextWeekStep > 1,
       source: {
         uri:
           "https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
@@ -119,6 +119,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = observer(pro
       title: "2. A cocinar",
       description: "¿La parte más divertida? A meterse en la cocina y ponerla patas arriba",
       onPress: useMemo(() => () => props.navigation.navigate("cookingRecipe"), [props.navigation]),
+      completed: nextWeekStep > 2,
       source: {
         uri:
           "https://images.unsplash.com/photo-1551218808-94e220e084d2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
@@ -128,6 +129,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = observer(pro
       title: "3. Empezar la semana",
       description: "Nosotros te guiaremos día a día para que cumplas tu objetivo",
       onPress: useMemo(() => setModalVisible, []),
+      completed: nextWeekStep > 3,
       source: {
         uri:
           "https://images.unsplash.com/photo-1519248494489-1e9f5586bf10?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
@@ -152,7 +154,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = observer(pro
       </Wrapper>
       {/*       <Week weekdays={addOnPressToWeekdays(getWeekList(3))} /> */}
       <Wrapper>
-        {hasActiveMenu && (
+        {hasNextWeek && (
           <Fragment>
             <Text category="h4" style={TITLE}>
               Próxima semana

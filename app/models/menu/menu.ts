@@ -1,6 +1,7 @@
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
 import toPairs from "ramda/es/toPairs"
 
+import { translate } from "../../i18n"
 import { IngredientModel } from "../ingredient"
 
 /**
@@ -23,16 +24,19 @@ export const MenuModel = types
   })
   .views(self => ({
     get shoppingList() {
-      const result = toPairs(self.ingredients).map(([key, value]) => {
-        return {
-          title: key, // TODO: Traduce this
-          data: value as string[],
-        }
-      })
-      return result
+      return toPairs(self.ingredients)
+        .map(([key, value]) => {
+          const ingredients = value as string[]
+          return {
+            title: translate(`ingredients.${key}`), // TODO: Traduce this
+            data: ingredients.slice(),
+          }
+        })
+        .filter(category => {
+          return category.data.length > 0
+        })
     },
-  })) // eslint-disable-line @typescript-eslint/no-unused-vars
-  .actions(self => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
+  }))
 
 /**
   * Un-comment the following to omit model attributes from your snapshots (and from async storage).

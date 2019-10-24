@@ -61,8 +61,13 @@ const BUTTON_TEXT: TextStyle = {
 export const BatchMenuScreen: React.FunctionComponent<BatchMenuScreenProps> = observer(props => {
   const goBack = React.useMemo(() => () => props.navigation.goBack(), [props.navigation])
   const {
-    menuStore: { selectedMenu },
+    menuStore: { selectedMenu, setNextWeek },
   } = useStores()
+
+  function handleOnPress() {
+    setNextWeek(selectedMenu.id)
+    goBack()
+  }
 
   return (
     <>
@@ -98,7 +103,7 @@ export const BatchMenuScreen: React.FunctionComponent<BatchMenuScreenProps> = ob
           </Text>
         </Wrapper>
       </Screen>
-      <Button status="success" style={END_BUTTON} textStyle={BUTTON_TEXT}>
+      <Button status="success" style={END_BUTTON} textStyle={BUTTON_TEXT} onPress={handleOnPress}>
         Seleccionar este batch cooking
       </Button>
     </>
