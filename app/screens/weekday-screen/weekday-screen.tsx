@@ -1,7 +1,6 @@
 import { observer } from "mobx-react-lite"
-import * as React from "react"
+import React, { useEffect } from "react"
 import { TextStyle, View, ViewStyle } from "react-native"
-import { Button } from "react-native-ui-kitten"
 import { NavigationScreenProps } from "react-navigation"
 
 import { BulletItem } from "../../components/bullet-item"
@@ -10,7 +9,8 @@ import { MenuSteps } from "../../components/menu-steps"
 import { Screen } from "../../components/screen"
 import { Text } from "../../components/text"
 import { Wrapper } from "../../components/wrapper"
-// import { useStores } from "../../models/root-store"
+import { WEEK_DAYS } from "../../models/menu-store"
+import { useStores } from "../../models/root-store"
 import { color, spacing } from "../../theme"
 
 export interface WeekdayScreenProps extends NavigationScreenProps<{}> {}
@@ -47,45 +47,50 @@ const TIME: TextStyle = {
   color: color.dim,
 }
 
-const END_BUTTON: ViewStyle = {
-  marginTop: spacing[4],
-  marginBottom: spacing[5],
-}
-
 export const WeekdayScreen: React.FunctionComponent<WeekdayScreenProps> = observer(props => {
-  // const { someStore } = useStores()
+  const {
+    menuStore: { selectedDay },
+    mealStore: { getMeal, mealById },
+  } = useStores()
   const goBack = React.useMemo(() => () => props.navigation.goBack(), [props.navigation])
   const active = true
-  console.tron.log("wprops", props)
-  const { weekday }: { weekday?: string } = props.navigation.state.params
+
+  useEffect(() => {
+    getMeal(selectedDay.lunch.meal_ref)
+  }, [getMeal, selectedDay.lunch.meal_ref])
+
+  const meal = mealById(selectedDay.lunch.meal_ref.id)
+
   return (
     <>
-      <Header text={weekday} onPress={goBack} style={active ? {} : HEADER_INACTIVE} />
+      <Header
+        tx={`weekdays.${WEEK_DAYS[selectedDay.index].day}`}
+        onPress={goBack}
+        style={active ? {} : HEADER_INACTIVE}
+      />
       <Screen style={ROOT} preset="scroll">
         <Wrapper>
           <Text text="Plato del día" category="h6" style={TITLE_WITH_TEXT} />
-          <Text>Pierna de cordero con ajo, verduras de primavera asadas y judías blancas</Text>
-          <Text text="Ingredientes" category="h6" style={TITLE_WITH_TEXT} />
-          <Text>El plato ya está preparado</Text>
-          <View style={ROW_TITLE}>
-            <Text text="Preparación" category="h6" />
-            <Text style={TIME}> - 10 minutos</Text>
-          </View>
-          <MenuSteps
-            style={MEAL_LIST}
-            steps={[
-              "Precalienta el horno a 180º y calienta la pierna de cordero con la guarnición durante 10 minutos.",
-              "¡Sírvelo!",
-            ]}
-          />
+          <Text>{selectedDay.lunch.meal}</Text>
+          {meal && (
+            <>
+              <Text text="Ingredientes" category="h6" style={TITLE_WITH_TEXT} />
+              {meal.extra_ingredients.length > 0 ? (
+                meal.extra_ingredients.map(ingredient => (
+                  <BulletItem key={ingredient} text={ingredient} color={color.dim}></BulletItem>
+                ))
+              ) : (
+                <Text>El plato ya está preparado.</Text>
+              )}
+              <View style={ROW_TITLE}>
+                <Text text="Preparación" category="h6" />
+                <Text style={TIME}> - {meal.minutes.toString()} minutos</Text>
+              </View>
+              <MenuSteps style={MEAL_LIST} steps={meal.steps} />
+            </>
+          )}
           <Text text="Para el día siguiente" category="h6" style={TITLE_WITH_TEXT} />
-          <Text>
-            Congela el bacalao a las finas hierbas, sácalo del congelador y déjalo en la nevera para
-            que vaya descongelándose.
-          </Text>
-          <Button status="success" style={END_BUTTON}>
-            Dar día como terminado
-          </Button>
+          <Text>{selectedDay.nextDay}</Text>
         </Wrapper>
       </Screen>
     </>

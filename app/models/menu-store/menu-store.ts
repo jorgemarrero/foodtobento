@@ -14,6 +14,7 @@ interface Day {
     meal: string
   }
   nextDay: string
+  id: string
 }
 
 enum IngredientsCategory {
@@ -47,6 +48,50 @@ interface WeekDay {
   }
 }
 
+export const WEEK_DAYS: WeekDay[] = [
+  {
+    day: "sunday",
+  },
+  {
+    day: "monday",
+    source: {
+      uri:
+        "https://images.unsplash.com/photo-1557800636-894a64c1696f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
+    },
+  },
+  {
+    day: "tuesday",
+    source: {
+      uri:
+        "https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
+    },
+  },
+  {
+    day: "wednesday",
+    source: {
+      uri:
+        "https://images.unsplash.com/photo-1561929540-8c0008aaab6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
+    },
+  },
+  {
+    day: "thursday",
+    source: {
+      uri:
+        "https://images.unsplash.com/photo-1463740839922-2d3b7e426a56?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
+    },
+  },
+  {
+    day: "friday",
+    source: {
+      uri:
+        "https://images.unsplash.com/photo-1481349518771-20055b2a7b24?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
+    },
+  },
+  {
+    day: "saturday",
+  },
+]
+
 /**
  * Model description here for TypeScript hints.
  */
@@ -77,50 +122,10 @@ export const MenuStoreModel = types
     get currentWeekMenu() {
       return self.menus.find(menu => menu.id === self.currentWeekMenuId)
     },
+  }))
+  .views(self => ({
     get currentWeekMenuDays() {
-      const WEEK_DAYS: WeekDay[] = [
-        {
-          day: "sunday",
-        },
-        {
-          day: "monday",
-          source: {
-            uri:
-              "https://images.unsplash.com/photo-1557800636-894a64c1696f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
-          },
-        },
-        {
-          day: "tuesday",
-          source: {
-            uri:
-              "https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
-          },
-        },
-        {
-          day: "wednesday",
-          source: {
-            uri:
-              "https://images.unsplash.com/photo-1561929540-8c0008aaab6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
-          },
-        },
-        {
-          day: "thursday",
-          source: {
-            uri:
-              "https://images.unsplash.com/photo-1463740839922-2d3b7e426a56?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
-          },
-        },
-        {
-          day: "friday",
-          source: {
-            uri:
-              "https://images.unsplash.com/photo-1481349518771-20055b2a7b24?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
-          },
-        },
-        {
-          day: "saturday",
-        },
-      ]
+      if (!self.hasCurrentWeek) return []
       return self.menus
         .find(menu => menu.id === self.currentWeekMenuId)
         .days.sort((a, b) => (a.index > b.index ? 1 : -1))
@@ -134,8 +139,11 @@ export const MenuStoreModel = types
           }
         })
     },
-  }))
-  .views(self => ({
+    get selectedDay() {
+      const id = self.rootStore.navigationStore.getIdParam()
+      if (!self.hasCurrentWeek) return null
+      return self.currentWeekMenu.days.find(day => day.id === id)
+    },
     get hasAllIngredients() {
       return (
         self.ingredientsSelected.length ===
@@ -196,7 +204,9 @@ export const MenuStoreModel = types
             .collection("days")
             .get()
           data.days = daysSnapshot.docs.map(doc => {
-            return doc.data() as Day
+            const day = doc.data() as Day
+            day.id = doc.id
+            return day
           })
           return data
         }),

@@ -80,8 +80,8 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = observer(pro
     return weekdays.map(weekday => {
       return {
         ...weekday,
-        onPress: weekday.day
-          ? () => props.navigation.navigate("weekday", { weekday: weekday.day })
+        onPress: weekday.id
+          ? () => props.navigation.navigate("weekday", { id: weekday.id })
           : () => {},
       }
     })

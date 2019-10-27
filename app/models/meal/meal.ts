@@ -1,17 +1,17 @@
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
 
-import { LunchModel } from "../lunch"
-
 /**
  * Model description here for TypeScript hints.
  */
-export const DayModel = types
-  .model("Day")
+export const MealModel = types
+  .model("Meal")
   .props({
-    index: types.integer,
-    lunch: LunchModel,
-    nextDay: types.string,
+    minutes: types.number,
+    name: types.string,
+    steps: types.optional(types.array(types.string), []),
     id: types.identifier,
+    // eslint-disable-next-line @typescript-eslint/camelcase
+    extra_ingredients: types.optional(types.array(types.string), []),
   })
   .views(self => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
   .actions(self => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
@@ -24,7 +24,7 @@ export const DayModel = types
   *  .postProcessSnapshot(omit(["password", "socialSecurityNumber", "creditCardNumber"]))
   */
 
-type DayType = Instance<typeof DayModel>
-export interface Day extends DayType {}
-type DaySnapshotType = SnapshotOut<typeof DayModel>
-export interface DaySnapshot extends DaySnapshotType {}
+type MealType = Instance<typeof MealModel>
+export interface Meal extends MealType {}
+type MealSnapshotType = SnapshotOut<typeof MealModel>
+export interface MealSnapshot extends MealSnapshotType {}

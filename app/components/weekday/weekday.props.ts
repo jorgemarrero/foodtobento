@@ -22,6 +22,10 @@ export interface WeekdayProps {
 
   day?: "monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday" | "sunday"
 
+  index: number
+
+  id: string
+
   onPress?: () => void
 
   isFirst?: boolean
