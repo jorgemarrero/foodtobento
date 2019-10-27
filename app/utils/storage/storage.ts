@@ -50,8 +50,20 @@ export async function load(key: string): Promise<any | null> {
  * @param value The value to store.
  */
 export async function save(key: string, value: any): Promise<boolean> {
+  const getCircularReplacer = () => {
+    const seen = new WeakSet()
+    return (key, value) => {
+      if (typeof value === "object" && value !== null) {
+        if (seen.has(value)) {
+          return
+        }
+        seen.add(value)
+      }
+      return value
+    }
+  }
   try {
-    await AsyncStorage.setItem(key, JSON.stringify(value))
+    await AsyncStorage.setItem(key, JSON.stringify(value, getCircularReplacer()))
     return true
   } catch {
     return false
