@@ -1,3 +1,4 @@
+import { FirebaseFirestoreTypes } from "@react-native-firebase/firestore"
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
 import toPairs from "ramda/es/toPairs"
 
@@ -18,7 +19,7 @@ export const MenuModel = types
     vegan: types.boolean,
     preparation: types.array(types.string),
     steps: types.array(types.string),
-    // date: types.Date,
+    date: types.frozen<FirebaseFirestoreTypes.Timestamp>(),
     description: types.string,
     name: types.string,
     days: types.array(DayModel),

@@ -11,7 +11,6 @@ import { Step } from "../../components/progress-steps/progress-steps.props"
 import { Screen } from "../../components/screen"
 import { Text } from "../../components/text"
 import { Week } from "../../components/week"
-import { getWeekList } from "../../components/week/week.story"
 import { WeekdayProps } from "../../components/weekday/weekday.props"
 import { Wrapper } from "../../components/wrapper"
 import { useStores } from "../../models/root-store"
@@ -67,7 +66,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = observer(pro
   const {
     menuStore: {
       getData: getMenus,
-      menus,
+      sortedMenus,
       hasNextWeek,
       nextWeekStep,
       completeSteps,
@@ -184,7 +183,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = observer(pro
         <Text category="p2" style={HINT}>
           Cada semana dos nuevos menus
         </Text>
-        <MenuList menus={addOnPressToMenus(menus)} />
+        <MenuList menus={addOnPressToMenus(sortedMenus)} />
       </Wrapper>
     </Screen>
   )

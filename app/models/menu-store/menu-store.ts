@@ -34,7 +34,7 @@ interface Menu {
   vegan: boolean
   preparation: string[]
   steps: string[]
-  date: Date
+  date: FirebaseFirestoreTypes.Timestamp
   description: string
   name: string
   days: Day[]
@@ -112,6 +112,12 @@ export const MenuStoreModel = types
     ingredientsSelected: types.optional(types.array(types.string), []),
   })
   .views(self => ({
+    get sortedMenus() {
+      return self.menus.sort((a, b) => {
+        if (a.date.toMillis > b.date.toMillis) return 1
+        else return -1
+      })
+    },
     get hasNextWeek() {
       return self.nextWeekMenuId !== ""
     },
