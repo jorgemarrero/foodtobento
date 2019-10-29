@@ -1,61 +1,74 @@
 import * as React from "react"
-import { View, ViewStyle, TextStyle } from "react-native"
-import { HeaderProps } from "./header.props"
-import { Button } from "../button"
-import { Icon } from "../icon"
-import { Text } from "../text"
-import { spacing } from "../../theme"
-import { translate } from "../../i18n/"
+import { SafeAreaView, TextStyle, TouchableOpacity, View, ViewStyle } from "react-native"
+import { Icon } from "react-native-ui-kitten"
 
-// static styles
-const ROOT: ViewStyle = {
-  flexDirection: "row",
-  paddingHorizontal: spacing[4],
-  alignItems: "center",
-  paddingTop: spacing[5],
-  paddingBottom: spacing[5],
-  justifyContent: "flex-start",
+import { color, spacing } from "../../theme"
+import { Text } from "../text"
+
+export interface HeaderProps {
+  /**
+   * Text which is looked up via i18n.
+   */
+  tx?: string
+
+  /**
+   * The text to display if not using `tx` or nested components.
+   */
+  text?: string
+
+  /**
+   * An optional style override useful for padding & margin.
+   */
+  style?: ViewStyle
+
+  onPress?: () => void
 }
-const TITLE: TextStyle = { textAlign: "center" }
-const TITLE_MIDDLE: ViewStyle = { flex: 1, justifyContent: "center" }
-const LEFT: ViewStyle = { width: 32 }
-const RIGHT: ViewStyle = { width: 32 }
+
+const HEADER: ViewStyle = {
+  height: 80,
+  width: "100%",
+  backgroundColor: color.palette.green,
+  flexDirection: "row",
+  alignItems: "center",
+}
+
+const ICON_BUTTON: ViewStyle = {
+  padding: spacing[4],
+}
+
+const ICON_BUTTON_FAKE: ViewStyle = {
+  ...ICON_BUTTON,
+  opacity: 0,
+}
+
+const ICON: ViewStyle = {
+  width: 28,
+  height: 28,
+}
+
+const TITLE: TextStyle = {
+  flex: 1,
+  textAlign: "center",
+  color: color.palette.white,
+}
 
 /**
- * Header that appears on many screens. Will hold navigation buttons and screen title.
+ * Component description here for TypeScript tips.
  */
-export const Header: React.FunctionComponent<HeaderProps> = props => {
-  const {
-    onLeftPress,
-    onRightPress,
-    rightIcon,
-    leftIcon,
-    headerText,
-    headerTx,
-    style,
-    titleStyle,
-  } = props
-  const header = headerText || (headerTx && translate(headerTx)) || ""
+export function Header(props: HeaderProps) {
+  // grab the props
+  const { tx, text, style, onPress } = props
 
   return (
-    <View style={{ ...ROOT, ...style }}>
-      {leftIcon ? (
-        <Button preset="link" onPress={onLeftPress}>
-          <Icon icon={leftIcon} />
-        </Button>
-      ) : (
-        <View style={LEFT} />
-      )}
-      <View style={TITLE_MIDDLE}>
-        <Text style={{ ...TITLE, ...titleStyle }} text={header} />
+    <SafeAreaView style={{ ...HEADER, ...style }}>
+      <TouchableOpacity style={ICON_BUTTON} onPress={onPress}>
+        <Icon name="arrow-back-outline" style={ICON} fill={color.palette.white} />
+      </TouchableOpacity>
+
+      <Text category="h5" style={TITLE} tx={tx} text={text}></Text>
+      <View style={ICON_BUTTON_FAKE}>
+        <Icon name="arrow-back-outline" style={ICON} />
       </View>
-      {rightIcon ? (
-        <Button preset="link" onPress={onRightPress}>
-          <Icon icon={rightIcon} />
-        </Button>
-      ) : (
-        <View style={RIGHT} />
-      )}
-    </View>
+    </SafeAreaView>
   )
 }

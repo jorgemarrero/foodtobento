@@ -22,16 +22,20 @@
     "patch": "patch-package",
     "postinstall": "node ./bin/postInstall",
     "prepare": "npm-run-all patch hack:*",
-    "storybook": "storybook start -p 9001 --skip-packager",
     "adb": "adb reverse tcp:9090 tcp:9090 && adb reverse tcp:3000 tcp:3000 && adb reverse tcp:9001 tcp:9001 && adb reverse tcp:8081 tcp:8081"
   },
   "dependencies": {
+    "@eva-design/eva": "^1.2.0",
     "@react-native-community/async-storage": "^1.5.1",
+    "@react-native-firebase/app": "^6.0.1",
+    "@react-native-firebase/auth": "^6.0.1",
+    "@react-native-firebase/firestore": "^6.0.1",
+    "@ui-kitten/eva-icons": "^4.2.0",
     "apisauce": "1.0.3",
     "i18n-js": "^3.0.11",
     "lodash.throttle": "4.1.1",
     "mobx": "^4.13.0",
-    "mobx-react": "^6.1.1",
+    "mobx-react-lite": "^1.5.0",
     "mobx-state-tree": "^3.14.1",
     "ramda": "0.26.1",
     "react": "16.9.0",
@@ -40,6 +44,8 @@
     "react-native-keychain": "3.1.3",
     "react-native-localize": "^1.0.0",
     "react-native-splash-screen": "3.1.1",
+    "react-native-svg": "^9.11.1",
+    "react-native-ui-kitten": "^4.2.0",
     "react-navigation": "3.11.1",
     "reactotron-mst": "^3.1.1",
     "reactotron-react-native": "^4.0.0-beta.1",
@@ -63,18 +69,23 @@
     "@typescript-eslint/parser": "^1.1.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^24.9.0",
+    "cz-conventional-changelog": "3.0.2",
     "detox": "^14.0.1",
     "emotion-theming": "^10.0.14",
-    "eslint": "^6.4.0",
-    "eslint-config-prettier": "^6.0.0",
-    "eslint-config-standard": "^13.0.1",
-    "eslint-plugin-import": "^2.15.0",
+    "eslint": "6.5.1",
+    "eslint-config-prettier": "^6.4.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-node": "^9.1.0",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-react": "^7.12.4",
-    "eslint-plugin-react-native": "^3.6.0",
-    "eslint-plugin-standard": "^4.0.0",
-    "ignite-bowser": "^4.7.1",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react-hooks": "^2.1.2",
+    "eslint-plugin-react-native": "^3.7.0",
+    "eslint-plugin-simple-import-sort": "^4.0.0",
+    "eslint-plugin-standard": "^4.0.1",
+    "husky": "^3.0.9",
+    "ignite-bowser": "^4.8.1",
     "jest": "^24.9.0",
     "jetifier": "^1.6.1",
     "metro-react-native-babel-preset": "^0.56.0",
@@ -82,6 +93,7 @@
     "patch-package": "6.1.2",
     "postinstall-prepare": "1.0.1",
     "prettier": "1.18.2",
+    "prettier-eslint": "^9.0.0",
     "react-devtools-core": "3.6.3",
     "react-native-dotenv": "^0.2.0",
     "react-powerplug": "1.0.0",
@@ -134,11 +146,14 @@
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",
     "extends": [
-      "prettier",
       "plugin:@typescript-eslint/recommended",
       "plugin:react/recommended",
       "plugin:react-native/all",
-      "standard"
+      "standard",
+      "prettier",
+      "prettier/@typescript-eslint",
+      "prettier/standard",
+      "prettier/react"
     ],
     "parserOptions": {
       "ecmaFeatures": {
@@ -147,9 +162,12 @@
       "project": "./tsconfig.json"
     },
     "plugins": [
+      "simple-import-sort",
       "@typescript-eslint",
       "react",
-      "react-native"
+      "react-native",
+      "react-hooks",
+      "prettier"
     ],
     "settings": {
       "react": {
@@ -171,6 +189,7 @@
       "it": false
     },
     "rules": {
+      "prettier/prettier": "error",
       "comma-dangle": 0,
       "no-unused-vars": 0,
       "no-undef": 0,
@@ -186,7 +205,15 @@
       "@typescript-eslint/no-explicit-any": 0,
       "@typescript-eslint/no-object-literal-type-assertion": 0,
       "@typescript-eslint/no-empty-interface": 0,
-      "@typescript-eslint/no-var-requires": 0
+      "@typescript-eslint/no-var-requires": 0,
+      "simple-import-sort/sort": "error",
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
     }
   }
 }

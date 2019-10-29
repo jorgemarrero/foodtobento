@@ -1,4 +1,5 @@
 import { getEnv, IStateTreeNode } from "mobx-state-tree"
+
 import { Environment } from "../environment"
 
 /**
@@ -11,7 +12,7 @@ export const withEnvironment = (self: IStateTreeNode) => ({
      * The environment.
      */
     get environment() {
-      return getEnv(self) as Environment
+      return getEnv<Environment>(self)
     },
   },
 })

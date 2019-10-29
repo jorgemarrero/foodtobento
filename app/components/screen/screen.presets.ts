@@ -1,5 +1,6 @@
-import { ViewStyle } from "react-native"
 import { isNil } from "ramda"
+import { ViewStyle } from "react-native"
+
 import { color } from "../../theme"
 
 /**

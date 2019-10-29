@@ -1,11 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-native/no-color-literals */
 
+import { storiesOf } from "@storybook/react-native"
 import * as React from "react"
 import { View, ViewStyle } from "react-native"
-import { storiesOf } from "@storybook/react-native"
-import { StoryScreen, Story, UseCase } from "../../../storybook/views"
 import { Toggle } from "react-powerplug"
+
+import { Story, StoryScreen, UseCase } from "../../../storybook/views"
 import { Switch } from "."
 
 declare var module

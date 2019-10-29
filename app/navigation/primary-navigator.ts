@@ -1,11 +1,20 @@
 import { createStackNavigator } from "react-navigation"
-import { WelcomeScreen } from "../screens/welcome-screen"
-import { DemoScreen } from "../screens/demo-screen"
+
+import { BatchMenuScreen } from "../screens/batch-menu-screen"
+import { CookingRecipeScreen } from "../screens/cooking-recipe-screen"
+import { HomeScreen } from "../screens/home-screen"
+import { SettingsScreen } from "../screens/settings-screen"
+import { ShoppingListScreen } from "../screens/shopping-list-screen"
+import { WeekdayScreen } from "../screens/weekday-screen"
 
 export const PrimaryNavigator = createStackNavigator(
   {
-    welcome: { screen: WelcomeScreen },
-    demo: { screen: DemoScreen },
+    home: { screen: HomeScreen },
+    weekday: { screen: WeekdayScreen },
+    shoppingList: { screen: ShoppingListScreen },
+    cookingRecipe: { screen: CookingRecipeScreen },
+    batchMenu: { screen: BatchMenuScreen },
+    settings: { screen: SettingsScreen },
   },
   {
     headerMode: "none",

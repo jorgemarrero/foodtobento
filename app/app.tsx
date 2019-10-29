@@ -3,14 +3,16 @@
 // In this file, we'll be kicking off our app or storybook.
 
 import "./i18n"
-import React, { useState, useEffect } from "react"
-import { AppRegistry, YellowBox } from "react-native"
-import { StatefulNavigator, BackButtonHandler, exitRoutes } from "./navigation"
-import { StorybookUIRoot } from "../storybook"
-import { RootStore, RootStoreProvider, setupRootStore } from "./models/root-store"
+import "./utils/fixAndroidFont"
 
 import { contains } from "ramda"
+import React, { useEffect, useState } from "react"
+import { AppRegistry, YellowBox } from "react-native"
 
+import { StorybookUIRoot } from "../storybook"
+import { RootStore, RootStoreProvider, setupRootStore } from "./models/root-store"
+import { BackButtonHandler, exitRoutes, StatefulNavigator } from "./navigation"
+import { ThemeProvider } from "./theme-provider"
 /**
  * Ignore some yellowbox warnings. Some of these are for deprecated functions
  * that we haven't gotten around to replacing yet.
@@ -66,7 +68,9 @@ export const App: React.FunctionComponent<{}> = () => {
   return (
     <RootStoreProvider value={rootStore}>
       <BackButtonHandler canExit={canExit}>
-        <StatefulNavigator />
+        <ThemeProvider>
+          <StatefulNavigator />
+        </ThemeProvider>
       </BackButtonHandler>
     </RootStoreProvider>
   )

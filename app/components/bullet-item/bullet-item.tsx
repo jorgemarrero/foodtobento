@@ -1,41 +1,42 @@
 import * as React from "react"
-import { View, ViewStyle, ImageStyle, TextStyle } from "react-native"
+import { ImageStyle, TextStyle, View, ViewStyle } from "react-native"
+
+import { color, spacing } from "../../theme"
 import { Text } from "../text"
-import { Icon } from "../icon"
-import { spacing } from "../../theme"
+import { TextProps } from "../text/text.props"
 
 const BULLET_ITEM: ViewStyle = {
   flexDirection: "row",
-  marginTop: spacing[4],
-  paddingBottom: spacing[4],
-  borderBottomWidth: 1,
-  borderBottomColor: "#3A3048",
+  marginTop: spacing[1],
+  paddingBottom: spacing[1],
+  alignItems: "center",
 }
-const BULLET_CONTAINER: ViewStyle = {
-  marginRight: spacing[4] - 1,
-  marginTop: spacing[2],
-}
+
 const BULLET: ImageStyle = {
   width: 8,
   height: 8,
-}
-const BULLET_TEXT: TextStyle = {
-  flex: 1,
-  fontFamily: "Montserrat-Regular",
-  color: "#BAB6C8",
-  fontSize: 15,
-  lineHeight: 22,
+  borderRadius: 8,
+  backgroundColor: color.palette.green,
+  marginLeft: spacing[2],
+  marginRight: spacing[3],
 }
 
-export interface BulletItemProps {
-  text: string
+const TEXT: TextStyle = {
+  flex: 1,
+}
+
+export interface BulletItemProps extends TextProps {
+  color?: string
 }
 
 export function BulletItem(props: BulletItemProps) {
+  const { color } = props
+
+  const bulletStyle: ViewStyle = color ? { ...BULLET, backgroundColor: color } : BULLET
   return (
     <View style={BULLET_ITEM}>
-      <Icon icon="bullet" containerStyle={BULLET_CONTAINER} style={BULLET} />
-      <Text style={BULLET_TEXT} text={props.text} />
+      <View style={bulletStyle}></View>
+      <Text style={TEXT} {...props} />
     </View>
   )
 }

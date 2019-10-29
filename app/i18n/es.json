@@ -1,0 +1,25 @@
+{
+  "common": {
+    "ok": "OK",
+    "cancel": "Cancelar",
+    "back": "Atrás"
+  },
+  "ingredients": {
+    "pantry": "Despensa 🧺",
+    "dairy": "Lácteos 🥛",
+    "fish": "Pescado 🐟",
+    "meat": "Carne 🥩",
+    "miscellaneous": "Otros ✌️",
+    "vegetable": "Verduras 🥦",
+    "fruit": "Frutas 🍎"
+  },
+  "weekdays": {
+    "monday": "Lunes",
+    "tuesday": "Martes",
+    "wednesday": "Miércoles",
+    "thursday": "Jueves",
+    "friday": "Viernes",
+    "saturday": "Sábado",
+    "sunday": "Domingo"
+  }
+}

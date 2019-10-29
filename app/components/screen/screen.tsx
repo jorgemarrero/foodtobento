@@ -1,14 +1,18 @@
 import * as React from "react"
 import { KeyboardAvoidingView, Platform, ScrollView, StatusBar, View } from "react-native"
+import { styled } from "react-native-ui-kitten"
 import { SafeAreaView } from "react-navigation"
-import { ScreenProps } from "./screen.props"
+
+import { color } from "../../theme"
 import { isNonScrolling, offsets, presets } from "./screen.presets"
+import { ScreenProps } from "./screen.props"
 
 const isIos = Platform.OS === "ios"
 
 function ScreenWithoutScrolling(props: ScreenProps) {
-  const preset = presets["fixed"]
+  const preset = presets.fixed
   const style = props.style || {}
+  const themedStyle = props.themedStyle || {}
   const backgroundStyle = props.backgroundColor ? { backgroundColor: props.backgroundColor } : {}
   const Wrapper = props.unsafe ? View : SafeAreaView
 
@@ -18,15 +22,16 @@ function ScreenWithoutScrolling(props: ScreenProps) {
       behavior={isIos ? "padding" : null}
       keyboardVerticalOffset={offsets[props.keyboardOffset || "none"]}
     >
-      <StatusBar barStyle={props.statusBar || "light-content"} />
-      <Wrapper style={[preset.inner, style]}>{props.children}</Wrapper>
+      <StatusBar barStyle={props.statusBar || "light-content"} backgroundColor={color.storybookDarkBg}/>
+      <Wrapper style={[themedStyle, preset.inner, style]}>{props.children}</Wrapper>
     </KeyboardAvoidingView>
   )
 }
 
 function ScreenWithScrolling(props: ScreenProps) {
-  const preset = presets["scroll"]
+  const preset = presets.scroll
   const style = props.style || {}
+  const themedStyle = props.themedStyle || {}
   const backgroundStyle = props.backgroundColor ? { backgroundColor: props.backgroundColor } : {}
   const Wrapper = props.unsafe ? View : SafeAreaView
 
@@ -36,11 +41,11 @@ function ScreenWithScrolling(props: ScreenProps) {
       behavior={isIos ? "padding" : null}
       keyboardVerticalOffset={offsets[props.keyboardOffset || "none"]}
     >
-      <StatusBar barStyle={props.statusBar || "light-content"} />
+      <StatusBar barStyle={props.statusBar || "light-content"} backgroundColor={color.storybookDarkBg} />
       <Wrapper style={[preset.outer, backgroundStyle]}>
         <ScrollView
           style={[preset.outer, backgroundStyle]}
-          contentContainerStyle={[preset.inner, style]}
+          contentContainerStyle={[themedStyle, preset.inner, style]}
         >
           {props.children}
         </ScrollView>
@@ -54,10 +59,13 @@ function ScreenWithScrolling(props: ScreenProps) {
  *
  * @param props The screen props
  */
-export function Screen(props: ScreenProps) {
+export function ScreenComponent(props: ScreenProps) {
   if (isNonScrolling(props.preset)) {
     return <ScreenWithoutScrolling {...props} />
   } else {
     return <ScreenWithScrolling {...props} />
   }
 }
+
+ScreenComponent.styledComponentName = "Layout"
+export const Screen = styled(ScreenComponent)

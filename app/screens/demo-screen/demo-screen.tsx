@@ -1,16 +1,17 @@
 import * as React from "react"
 import { Image, ImageStyle, Platform, TextStyle, View, ViewStyle } from "react-native"
 import { NavigationScreenProps } from "react-navigation"
+
+import { BulletItem } from "../../components/bullet-item"
+import { Button } from "../../components/button"
+import { Header } from "../../components/header"
 import { Screen } from "../../components/screen"
 import { Text } from "../../components/text"
-import { Button } from "../../components/button"
 import { Wallpaper } from "../../components/wallpaper"
-import { Header } from "../../components/header"
-import { color, spacing } from "../../theme"
-import { logoIgnite, heart } from "./"
-import { BulletItem } from "../../components/bullet-item"
 import { Api } from "../../services/api"
+import { color, spacing } from "../../theme"
 import { save } from "../../utils/storage"
+import { heart, logoIgnite } from "./"
 
 const FULL: ViewStyle = { flex: 1 }
 const CONTAINER: ViewStyle = {

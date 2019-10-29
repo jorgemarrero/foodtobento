@@ -1,7 +1,8 @@
 import { Instance, types } from "mobx-state-tree"
-import { RootNavigator } from "./root-navigator"
-import { NavigationActions, NavigationAction } from "react-navigation"
+import { NavigationAction, NavigationActions } from "react-navigation"
+
 import { NavigationEvents } from "./navigation-events"
+import { RootNavigator } from "./root-navigator"
 
 const DEFAULT_STATE = RootNavigator.router.getStateForAction(NavigationActions.init(), null)
 
@@ -86,6 +87,16 @@ export const NavigationStoreModel = NavigationEvents.named("NavigationStore")
      */
     navigateTo(routeName: string) {
       self.dispatch(NavigationActions.navigate({ routeName }))
+    },
+    /**
+     * Get the id param of the current route.
+     */
+    getIdParam(): string {
+      const route = self.findCurrentRoute()
+      if (!route) return undefined
+      if (!route.params) return undefined
+      if (typeof route.params.id !== "string") return undefined
+      return route.params.id
     },
   }))
 

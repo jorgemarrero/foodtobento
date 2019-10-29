@@ -1,6 +1,7 @@
-import { ApisauceInstance, create, ApiResponse } from "apisauce"
-import { getGeneralApiProblem } from "./api-problem"
+import { ApiResponse, ApisauceInstance, create } from "apisauce"
+
 import { ApiConfig, DEFAULT_API_CONFIG } from "./api-config"
+import { getGeneralApiProblem } from "./api-problem"
 import * as Types from "./api.types"
 
 /**
