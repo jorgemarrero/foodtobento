@@ -39,7 +39,7 @@ export const MenuModel = types
         })
     },
     get meals() {
-      return self.days.map(day => day.lunch.meal)
+      return self.days.map(day => day.lunch.completeMeal)
     },
     get mealsFridge() {
       return self.conservation.fridge

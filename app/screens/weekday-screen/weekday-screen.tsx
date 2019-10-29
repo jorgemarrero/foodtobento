@@ -16,7 +16,7 @@ import { color, spacing } from "../../theme"
 export interface WeekdayScreenProps extends NavigationScreenProps<{}> {}
 
 const ROOT: ViewStyle = {
-  // backgroundColor: color.palette.green,
+  paddingBottom: spacing[5],
 }
 
 const HEADER_INACTIVE: ViewStyle = {
@@ -57,9 +57,26 @@ export const WeekdayScreen: React.FunctionComponent<WeekdayScreenProps> = observ
 
   useEffect(() => {
     getMeal(selectedDay.lunch.mealRef)
-  }, [getMeal, selectedDay.lunch.mealRef])
+    if (selectedDay.lunch.starterRef) getMeal(selectedDay.lunch.starterRef)
+  }, [getMeal, selectedDay.lunch.mealRef, selectedDay.lunch.starterRef])
 
   const meal = mealById(selectedDay.lunch.mealRef.id)
+
+  let actualIngredientsWeekday: string[]
+  let actualMinutes: number
+  let actualSteps: string[]
+
+  if (meal) {
+    actualIngredientsWeekday = meal.ingredientsWeekday
+    actualMinutes = meal.minutes
+    actualSteps = meal.steps
+  }
+  if (selectedDay.lunch.starterRef) {
+    const starter = mealById(selectedDay.lunch.starterRef.id)
+    actualIngredientsWeekday = [...starter.ingredientsWeekday, ...actualIngredientsWeekday]
+    actualMinutes += starter.minutes
+    actualSteps = [...starter.steps, ...actualSteps]
+  }
 
   return (
     <>
@@ -71,12 +88,12 @@ export const WeekdayScreen: React.FunctionComponent<WeekdayScreenProps> = observ
       <Screen style={ROOT} preset="scroll">
         <Wrapper>
           <Text text="Plato del día" category="h6" style={TITLE_WITH_TEXT} />
-          <Text>{selectedDay.lunch.meal}</Text>
+          <Text>{selectedDay.lunch.completeMeal}</Text>
           {meal && (
             <>
               <Text text="Ingredientes" category="h6" style={TITLE_WITH_TEXT} />
-              {meal.ingredientsWeekday.length > 0 ? (
-                meal.ingredientsWeekday.map(ingredient => (
+              {actualIngredientsWeekday.length > 0 ? (
+                actualIngredientsWeekday.map(ingredient => (
                   <BulletItem key={ingredient} text={ingredient} color={color.dim}></BulletItem>
                 ))
               ) : (
@@ -84,9 +101,9 @@ export const WeekdayScreen: React.FunctionComponent<WeekdayScreenProps> = observ
               )}
               <View style={ROW_TITLE}>
                 <Text text="Preparación" category="h6" />
-                <Text style={TIME}> - {meal.minutes.toString()} minutos</Text>
+                <Text style={TIME}> - {actualMinutes.toString()} minutos</Text>
               </View>
-              <MenuSteps style={MEAL_LIST} steps={meal.steps} />
+              <MenuSteps style={MEAL_LIST} steps={actualSteps} />
             </>
           )}
           <Text text="Para el día siguiente" category="h6" style={TITLE_WITH_TEXT} />

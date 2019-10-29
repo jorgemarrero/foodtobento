@@ -11,7 +11,12 @@ export const LunchModel = types
     starter: types.maybe(types.string),
     starterRef: types.maybe(types.frozen<FirebaseFirestoreTypes.DocumentReference>()),
   })
-  .views(self => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
+  .views(self => ({
+    get completeMeal() {
+      if (!self.starter) return self.meal
+      return `${self.starter} + ${self.meal}`
+    },
+  }))
   .actions(self => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
 
 /**
