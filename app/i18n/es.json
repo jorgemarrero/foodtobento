@@ -5,12 +5,13 @@
     "back": "Atrás"
   },
   "ingredients": {
-    "dairy": "Despensa",
-    "fish": "Pescado",
-    "meat": "Carne",
-    "miscellaneous": "Otros",
-    "vegetables": "Verduras",
-    "fruit": "Frutas"
+    "pantry": "Despensa 🧺",
+    "dairy": "Lácteos 🥛",
+    "fish": "Pescado 🐟",
+    "meat": "Carne 🥩",
+    "miscellaneous": "Otros ✌️",
+    "vegetable": "Verduras 🥦",
+    "fruit": "Frutas 🍎"
   },
   "weekdays": {
     "monday": "Lunes",

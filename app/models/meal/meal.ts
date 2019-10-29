@@ -10,8 +10,7 @@ export const MealModel = types
     name: types.string,
     steps: types.optional(types.array(types.string), []),
     id: types.identifier,
-    // eslint-disable-next-line @typescript-eslint/camelcase
-    extra_ingredients: types.optional(types.array(types.string), []),
+    ingredientsWeekday: types.optional(types.array(types.string), []),
   })
   .views(self => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
   .actions(self => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars

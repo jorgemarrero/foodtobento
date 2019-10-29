@@ -56,10 +56,10 @@ export const WeekdayScreen: React.FunctionComponent<WeekdayScreenProps> = observ
   const active = true
 
   useEffect(() => {
-    getMeal(selectedDay.lunch.meal_ref)
-  }, [getMeal, selectedDay.lunch.meal_ref])
+    getMeal(selectedDay.lunch.mealRef)
+  }, [getMeal, selectedDay.lunch.mealRef])
 
-  const meal = mealById(selectedDay.lunch.meal_ref.id)
+  const meal = mealById(selectedDay.lunch.mealRef.id)
 
   return (
     <>
@@ -75,8 +75,8 @@ export const WeekdayScreen: React.FunctionComponent<WeekdayScreenProps> = observ
           {meal && (
             <>
               <Text text="Ingredientes" category="h6" style={TITLE_WITH_TEXT} />
-              {meal.extra_ingredients.length > 0 ? (
-                meal.extra_ingredients.map(ingredient => (
+              {meal.ingredientsWeekday.length > 0 ? (
+                meal.ingredientsWeekday.map(ingredient => (
                   <BulletItem key={ingredient} text={ingredient} color={color.dim}></BulletItem>
                 ))
               ) : (

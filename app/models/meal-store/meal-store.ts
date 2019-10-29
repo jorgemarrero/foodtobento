@@ -35,8 +35,10 @@ export const MealStoreModel = types
       if (mealRef && mealRef.get) {
         const mealSnapshot = await mealRef.get()
         const data = mealSnapshot.data() as Meal
-        data.id = mealRef.id
-        self.setMeal(data)
+        if (data) {
+          data.id = mealRef.id
+          self.setMeal(data)
+        }
       }
     },
   }))

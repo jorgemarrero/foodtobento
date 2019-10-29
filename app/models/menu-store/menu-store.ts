@@ -8,10 +8,10 @@ import { MenuModel, MenuSnapshot } from "../menu/menu"
 interface Day {
   index: number
   lunch: {
-    // eslint-disable-next-line camelcase
-    meal_ref: FirebaseFirestoreTypes.DocumentReference
-    conservation: string
+    mealRef: FirebaseFirestoreTypes.DocumentReference
     meal: string
+    starterRef: FirebaseFirestoreTypes.DocumentReference // This is optional
+    starter: string // This is optional
   }
   nextDay: string
   id: string
@@ -22,8 +22,9 @@ enum IngredientsCategory {
   FISH = "fish",
   MEAT = "meat",
   MISCELLANEOUS = "miscellaneous",
-  VEGETABLES = "vegetables",
+  VEGETABLE = "vegetable",
   FRUIT = "fruit",
+  PANTRY = "pantry",
 }
 interface Menu {
   rating: number
@@ -39,6 +40,11 @@ interface Menu {
   days: Day[]
   meals: string[]
   id: string
+  conservation: {
+    fridge: string[]
+    freezer: string[]
+    normal: string[]
+  }
 }
 
 interface WeekDay {
@@ -194,7 +200,7 @@ export const MenuStoreModel = types
       const menusSnapshot = await firestore()
         .collection("menus")
         .get()
-      const menus: Menu[] = await Promise.all(
+      const menus = await Promise.all(
         menusSnapshot.docs.map(async doc => {
           const data = doc.data() as Menu
           data.id = doc.id

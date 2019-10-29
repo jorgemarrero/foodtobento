@@ -1,7 +1,7 @@
 import i18n from "i18n-js"
 import * as RNLocalize from "react-native-localize"
 
-const en = require("./en")
+const en = require("./es")
 const es = require("./es")
 
 i18n.fallbacks = true

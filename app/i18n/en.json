@@ -5,11 +5,12 @@
     "back": "Back"
   },
   "ingredients": {
-    "dairy": "Dairy 🧺",
+    "pantry": "Pantry 🧺",
+    "dairy": "Dairy 🥛",
     "fish": "Fish 🐟",
     "meat": "Meat 🥩",
     "miscellaneous": "Miscellaneous ✌️",
-    "vegetables": "Vegetables 🥦",
+    "vegetable": "Vegetables 🥦",
     "fruit": "Fruit 🍎"
   },
   "storybook": {

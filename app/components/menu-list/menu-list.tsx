@@ -86,7 +86,7 @@ export function MenuList(props: MenuListProps) {
     const rating = getRating(defaultRating)
     const actualSource: ImageSourcePropType = source || {
       uri:
-        "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
+        "https://images.unsplash.com/photo-1447903196606-76e102ef24f9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80",
     }
     return (
       <TouchableOpacity style={rootStyle} onPress={onPress}>
