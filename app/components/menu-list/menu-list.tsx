@@ -81,12 +81,24 @@ export function MenuList(props: MenuListProps) {
   const { menus } = props
 
   function renderMenu({ item }: { item: MenuProps }) {
-    const { nameTx, name, style, vegan, source, meals, rating: defaultRating, onPress } = item
+    const {
+      nameTx,
+      name,
+      style,
+      vegan,
+      source,
+      meals,
+      rating: defaultRating,
+      onPress,
+      image,
+    } = item
     const rootStyle = { ...ROOT, ...style }
     const rating = getRating(defaultRating)
+
     const actualSource: ImageSourcePropType = source || {
       uri:
-        "https://images.unsplash.com/photo-1447903196606-76e102ef24f9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80",
+        image ||
+        "https://images.unsplash.com/photo-1572360802761-c83f8f42da93?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=716&q=30",
     }
     return (
       <TouchableOpacity style={rootStyle} onPress={onPress}>

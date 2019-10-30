@@ -24,6 +24,7 @@ export const MenuModel = types
     name: types.string,
     days: types.array(DayModel),
     conservation: ConservationModel,
+    image: types.maybe(types.string),
   })
   .views(self => ({
     get shoppingList() {

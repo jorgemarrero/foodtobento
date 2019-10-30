@@ -13,6 +13,7 @@ import { Text } from "../../components/text"
 import { Week } from "../../components/week"
 import { WeekdayProps } from "../../components/weekday/weekday.props"
 import { Wrapper } from "../../components/wrapper"
+import { images } from "../../images"
 import { useStores } from "../../models/root-store"
 import { color, spacing } from "../../theme"
 
@@ -106,20 +107,14 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = observer(pro
       description: "Online con nosotros o en el súper",
       onPress: useMemo(() => () => props.navigation.navigate("shoppingList"), [props.navigation]),
       completed: nextWeekStep > 1,
-      source: {
-        uri:
-          "https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
-      },
+      source: images.step1,
     },
     {
       title: "2. A cocinar",
       description: "¿La parte más divertida? A meterse en la cocina y ponerla patas arriba",
       onPress: useMemo(() => () => props.navigation.navigate("cookingRecipe"), [props.navigation]),
       completed: nextWeekStep > 2,
-      source: {
-        uri:
-          "https://images.unsplash.com/photo-1551218808-94e220e084d2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
-      },
+      source: images.step2,
     },
     {
       title: "3. Empezar la semana",
@@ -132,10 +127,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = observer(pro
         [completeSteps],
       ),
       completed: nextWeekStep > 3,
-      source: {
-        uri:
-          "https://images.unsplash.com/photo-1519248494489-1e9f5586bf10?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
-      },
+      source: images.step3,
     },
   ]
 
