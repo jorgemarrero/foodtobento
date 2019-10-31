@@ -8,6 +8,8 @@ export interface MenuProps {
 
   source?: ImageSourcePropType
 
+  image?: string
+
   vegan?: boolean
 
   /**

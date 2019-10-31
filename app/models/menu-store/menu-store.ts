@@ -1,7 +1,9 @@
 import firestore, { FirebaseFirestoreTypes } from "@react-native-firebase/firestore"
+import storage from "@react-native-firebase/storage"
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
 import { flatten } from "ramda"
 
+import { images } from "../../images"
 import { withRootStore } from "../extensions"
 import { MenuModel, MenuSnapshot } from "../menu/menu"
 
@@ -40,6 +42,7 @@ interface Menu {
   days: Day[]
   meals: string[]
   id: string
+  image: string // This is optional
   conservation: {
     fridge: string[]
     freezer: string[]
@@ -60,38 +63,23 @@ export const WEEK_DAYS: WeekDay[] = [
   },
   {
     day: "monday",
-    source: {
-      uri:
-        "https://images.unsplash.com/photo-1557800636-894a64c1696f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
-    },
+    source: images.weekdays.monday,
   },
   {
     day: "tuesday",
-    source: {
-      uri:
-        "https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
-    },
+    source: images.weekdays.tuesday,
   },
   {
     day: "wednesday",
-    source: {
-      uri:
-        "https://images.unsplash.com/photo-1561929540-8c0008aaab6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
-    },
+    source: images.weekdays.wednesday,
   },
   {
     day: "thursday",
-    source: {
-      uri:
-        "https://images.unsplash.com/photo-1463740839922-2d3b7e426a56?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
-    },
+    source: images.weekdays.thursday,
   },
   {
     day: "friday",
-    source: {
-      uri:
-        "https://images.unsplash.com/photo-1481349518771-20055b2a7b24?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80",
-    },
+    source: images.weekdays.friday,
   },
   {
     day: "saturday",
@@ -220,6 +208,13 @@ export const MenuStoreModel = types
             day.id = doc.id
             return day
           })
+          try {
+            data.image = await storage()
+              .refFromURL("gs://food-to-bento.appspot.com/menus/calabaza.jpeg")
+              .getDownloadURL()
+          } catch (e) {
+            delete data.image
+          }
           return data
         }),
       )
