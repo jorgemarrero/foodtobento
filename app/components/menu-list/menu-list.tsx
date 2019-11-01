@@ -1,14 +1,15 @@
 import * as React from "react"
 import {
+  FlatList,
   Image,
   ImageBackground,
   ImageSourcePropType,
   ImageStyle,
   TextStyle,
+  TouchableOpacity,
   View,
   ViewStyle,
 } from "react-native"
-import { FlatList, TouchableOpacity } from "react-native-gesture-handler"
 
 import { color, spacing } from "../../theme"
 import { Text } from "../text"

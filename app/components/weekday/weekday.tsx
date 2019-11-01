@@ -1,6 +1,5 @@
 import * as React from "react"
-import { Image, ImageStyle, TextStyle, View, ViewStyle } from "react-native"
-import { TouchableOpacity } from "react-native-gesture-handler"
+import { Image, ImageStyle, TextStyle, TouchableOpacity, View, ViewStyle } from "react-native"
 
 import { color, spacing } from "../../theme"
 import { Text } from "../text"
