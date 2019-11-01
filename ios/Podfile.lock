@@ -6,7 +6,10 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.3):
     - BoringSSL-GRPC/Interface (= 0.0.3)
   - BoringSSL-GRPC/Interface (0.0.3)
+  - Crashlytics (3.12.0):
+    - Fabric (~> 1.9.0)
   - DoubleConversion (1.1.6)
+  - Fabric (1.9.0)
   - FBLazyVector (0.61.1)
   - FBReactNativeSpec (0.61.1):
     - Folly (= 2018.10.22.00)
@@ -352,6 +355,12 @@ PODS:
     - Firebase/Core (~> 6.8.1)
     - React
     - RNFBApp
+  - RNFBCrashlytics (6.0.3):
+    - Crashlytics (~> 3.12.0)
+    - Fabric (~> 1.9.0)
+    - Firebase/Core (~> 6.8.1)
+    - React
+    - RNFBApp
   - RNFBFirestore (6.0.3):
     - Firebase/Core (~> 6.8.1)
     - Firebase/Firestore (~> 6.8.1)
@@ -404,6 +413,7 @@ DEPENDENCIES:
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
+  - "RNFBCrashlytics (from `../node_modules/@react-native-firebase/crashlytics`)"
   - "RNFBFirestore (from `../node_modules/@react-native-firebase/firestore`)"
   - "RNFBStorage (from `../node_modules/@react-native-firebase/storage`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
@@ -416,6 +426,8 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - boost-for-react-native
     - BoringSSL-GRPC
+    - Crashlytics
+    - Fabric
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -494,6 +506,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-firebase/app"
   RNFBAuth:
     :path: "../node_modules/@react-native-firebase/auth"
+  RNFBCrashlytics:
+    :path: "../node_modules/@react-native-firebase/crashlytics"
   RNFBFirestore:
     :path: "../node_modules/@react-native-firebase/firestore"
   RNFBStorage:
@@ -512,7 +526,9 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
+  Crashlytics: 07fb167b1694128c1c9a5a5cc319b0e9c3ca0933
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
+  Fabric: f988e33c97f08930a413e08123064d2e5f68d655
   FBLazyVector: 0846affdb2924b01093eb696766ecb0104e409e0
   FBReactNativeSpec: c4cf958af1b97799b524f63a26a1c509c0295b04
   Firebase: 9cbe4e5b5eaafa05dc932be58b7c8c3820d71e88
@@ -560,6 +576,7 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: 60a80e72d95bf02a01cace55d3697d9724f0d77f
   RNFBApp: 92ae594c85e82e1e68434049b2a37e1f584cf8b9
   RNFBAuth: edc2e5986b92f0dfd0076b312caf7871a1646ed8
+  RNFBCrashlytics: 9bd8fb67b139c2555485ee61a8547c17da85f1e8
   RNFBFirestore: 781a0084ac0f152e859fb150bb3409a522abeee7
   RNFBStorage: 30bfae04c2c5c54d884e2edf86884a54f718d2e9
   RNGestureHandler: 4cb47a93019c1a201df2644413a0a1569a51c8aa
