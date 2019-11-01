@@ -4,6 +4,9 @@
 
 import "./i18n"
 import "./utils/fixAndroidFont"
+// TODO: REMOVE THIS IMPORT. IT'S A TEMPORAL FIX OF react-native-gesture-handler.
+// Read more in this issue https://github.com/kmagiera/react-native-gesture-handler/issues/746#issuecomment-537562738
+import "react-native-gesture-handler"
 
 import { contains } from "ramda"
 import React, { useEffect, useState } from "react"
