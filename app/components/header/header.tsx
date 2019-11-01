@@ -1,5 +1,13 @@
 import * as React from "react"
-import { SafeAreaView, TextStyle, TouchableOpacity, View, ViewStyle } from "react-native"
+import {
+  Platform,
+  SafeAreaView,
+  StatusBar,
+  TextStyle,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+} from "react-native"
 import { Icon } from "react-native-ui-kitten"
 
 import { color, spacing } from "../../theme"
@@ -25,7 +33,7 @@ export interface HeaderProps {
 }
 
 const HEADER: ViewStyle = {
-  height: 80,
+  height: 80 - (Platform.OS === "android" ? StatusBar.currentHeight : 0),
   width: "100%",
   backgroundColor: color.palette.green,
   flexDirection: "row",
