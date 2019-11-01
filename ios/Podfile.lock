@@ -371,7 +371,7 @@ PODS:
     - Firebase/Storage (~> 6.8.1)
     - React
     - RNFBApp
-  - RNGestureHandler (1.4.1):
+  - RNGestureHandler (1.5.0):
     - React
   - RNKeychain (3.1.3):
     - React
@@ -579,7 +579,7 @@ SPEC CHECKSUMS:
   RNFBCrashlytics: 9bd8fb67b139c2555485ee61a8547c17da85f1e8
   RNFBFirestore: 781a0084ac0f152e859fb150bb3409a522abeee7
   RNFBStorage: 30bfae04c2c5c54d884e2edf86884a54f718d2e9
-  RNGestureHandler: 4cb47a93019c1a201df2644413a0a1569a51c8aa
+  RNGestureHandler: a4ddde1ffc6e590c8127b8b7eabfdade45475c74
   RNKeychain: c658833a9cb2cbcba6423bdd6e16cce59e27da0e
   RNLocalize: f42aea3133d91d7fa3ec01284a6895019af1a83f
   RNSVG: be27aa7c58819f97399388ae53d7fa0572f32c7f
