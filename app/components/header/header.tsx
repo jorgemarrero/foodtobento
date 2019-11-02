@@ -33,7 +33,7 @@ export interface HeaderProps {
 }
 
 const HEADER: ViewStyle = {
-  height: 80 - (Platform.OS === "android" ? StatusBar.currentHeight : 0),
+  minHeight: 80 - (Platform.OS === "android" ? StatusBar.currentHeight : 0),
   width: "100%",
   backgroundColor: color.palette.green,
   flexDirection: "row",
