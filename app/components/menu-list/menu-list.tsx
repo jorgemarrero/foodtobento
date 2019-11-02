@@ -1,4 +1,5 @@
 import * as React from "react"
+import ContentLoader, { Rect } from "react-content-loader/native"
 import {
   FlatList,
   Image,
@@ -25,9 +26,12 @@ const FOOTER: ViewStyle = {
   paddingHorizontal: spacing[4],
   paddingVertical: spacing[3],
 }
-const IMAGE: ImageStyle = {
+const IMAGE_BG: ImageStyle = {
   width: "100%",
   height: 164,
+}
+const IMAGE: ImageStyle = {
+  backgroundColor: color.dim,
 }
 
 const VEGAN: ViewStyle = {
@@ -56,6 +60,10 @@ const INGREDIENTS: TextStyle = {
 const DESCRIPTION: ViewStyle = {
   flexDirection: "row",
   alignItems: "baseline",
+}
+
+const CONTENT_LOADER: ViewStyle = {
+  maxWidth: "100%",
 }
 
 function joinMeals(meals: string[]) {
@@ -103,7 +111,7 @@ export function MenuList(props: MenuListProps) {
     }
     return (
       <TouchableOpacity style={rootStyle} onPress={onPress}>
-        <ImageBackground source={actualSource} style={IMAGE}>
+        <ImageBackground source={actualSource} style={IMAGE_BG} imageStyle={IMAGE}>
           {vegan && (
             <View style={VEGAN}>
               <Image source={veganImage} style={VEGAN_IMAGE} />
@@ -127,6 +135,21 @@ export function MenuList(props: MenuListProps) {
       </TouchableOpacity>
     )
   }
-
+  if (menus.length < 1) {
+    return (
+      <ContentLoader
+        height={240}
+        style={CONTENT_LOADER}
+        speed={2}
+        primaryColor="#f3f3f3"
+        secondaryColor="#ecebeb"
+      >
+        <Rect x="0" y="185" rx="3" ry="3" width="350" height="6" />
+        <Rect x="0" y="205" rx="3" ry="3" width="380" height="6" />
+        <Rect x="0" y="225" rx="3" ry="3" width="201" height="6" />
+        <Rect x="0" y="9" rx="0" ry="0" width="402" height="158" />
+      </ContentLoader>
+    )
+  }
   return <FlatList renderItem={renderMenu} data={menus} />
 }
