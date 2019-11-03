@@ -1,9 +1,9 @@
 import { createStackNavigator } from "react-navigation"
 
+import { AboutScreen } from "../screens/about-screen"
 import { BatchMenuScreen } from "../screens/batch-menu-screen"
 import { CookingRecipeScreen } from "../screens/cooking-recipe-screen"
 import { HomeScreen } from "../screens/home-screen"
-import { SettingsScreen } from "../screens/settings-screen"
 import { ShoppingListScreen } from "../screens/shopping-list-screen"
 import { WeekdayScreen } from "../screens/weekday-screen"
 
@@ -14,7 +14,7 @@ export const PrimaryNavigator = createStackNavigator(
     shoppingList: { screen: ShoppingListScreen },
     cookingRecipe: { screen: CookingRecipeScreen },
     batchMenu: { screen: BatchMenuScreen },
-    settings: { screen: SettingsScreen },
+    about: { screen: AboutScreen },
   },
   {
     headerMode: "none",

@@ -59,9 +59,7 @@ const MODAL: ViewStyle = {
 export interface HomeScreenProps extends NavigationScreenProps<{}> {}
 
 export const HomeScreen: React.FunctionComponent<HomeScreenProps> = observer(props => {
-  const navigateSettings = useMemo(() => () => props.navigation.navigate("settings"), [
-    props.navigation,
-  ])
+  const navigateAbout = useMemo(() => () => props.navigation.navigate("about"), [props.navigation])
 
   const [startWeekModalVisible, setStartWeekModalVisible] = useState(false)
   const {
@@ -137,7 +135,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = observer(pro
   console.tron.log(currentWeekMenuDays)
   return (
     <Screen style={CONTAINER} preset="scroll" backgroundColor={color.palette.green}>
-      <TouchableOpacity style={SETTINGS_ICON_BUTTON} onPress={navigateSettings}>
+      <TouchableOpacity style={SETTINGS_ICON_BUTTON} onPress={navigateAbout}>
         <Icon name="info-outline" style={SETTINGS_ICON} fill={color.palette.offWhite}></Icon>
       </TouchableOpacity>
       <Wrapper>
