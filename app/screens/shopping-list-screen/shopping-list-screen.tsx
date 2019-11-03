@@ -35,7 +35,9 @@ const TITLE: TextStyle = {
 }
 
 const CHECK_BOX: ViewStyle = {
-  paddingVertical: spacing[2],
+  marginVertical: spacing[2],
+  paddingLeft: spacing[2],
+  minHeight: 40,
 }
 
 const END_BUTTON: ViewStyle = {
