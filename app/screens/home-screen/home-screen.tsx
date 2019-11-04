@@ -18,7 +18,7 @@ import { useStores } from "../../models/root-store"
 import { color, spacing } from "../../theme"
 
 const CONTAINER: ViewStyle = {
-  backgroundColor: color.palette.green,
+  backgroundColor: color.transparent,
 }
 
 const TOP_SEPARATOR: ViewStyle = {
@@ -134,7 +134,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = observer(pro
   }, [getMenus])
   console.tron.log(currentWeekMenuDays)
   return (
-    <Screen style={CONTAINER} preset="scroll" backgroundColor={color.palette.green}>
+    <Screen style={CONTAINER} preset="scroll" backgroundColor={color.transparent}>
       <TouchableOpacity style={SETTINGS_ICON_BUTTON} onPress={navigateAbout}>
         <Icon name="info-outline" style={SETTINGS_ICON} fill={color.palette.offWhite}></Icon>
       </TouchableOpacity>
@@ -168,10 +168,10 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = observer(pro
           </Fragment>
         )}
         <Text category="h4" style={TITLE}>
-          Menus Food to Bento
+          Menús Food to Bento
         </Text>
         <Text category="p2" style={HINT}>
-          Cada semana dos nuevos menus
+          Nuevos menús cada semana
         </Text>
         <MenuList menus={addOnPressToMenus(sortedMenus)} />
       </Wrapper>

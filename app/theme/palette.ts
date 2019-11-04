@@ -9,6 +9,7 @@ export const palette = {
   angry: "#dd3333",
   greenTransparent: "rgba(60, 180, 110, 0.85)",
   green: "rgb(3, 150, 65)",
+  greenDark: "#02662c",
   grayTransparent: "rgba(99, 105, 112, 0.4)",
   blueGreen: "#0D98BA",
 }
