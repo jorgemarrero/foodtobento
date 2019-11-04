@@ -9,7 +9,6 @@ const BULLET_ITEM: ViewStyle = {
   flexDirection: "row",
   marginTop: spacing[1],
   paddingBottom: spacing[1],
-  alignItems: "center",
 }
 
 const BULLET: ImageStyle = {
@@ -19,6 +18,7 @@ const BULLET: ImageStyle = {
   backgroundColor: color.palette.green,
   marginLeft: spacing[2],
   marginRight: spacing[3],
+  marginTop: 6,
 }
 
 const TEXT: TextStyle = {
