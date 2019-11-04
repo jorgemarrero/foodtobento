@@ -27,6 +27,7 @@ export interface ShoppingListScreenProps extends NavigationScreenProps<{}> {}
 const ROOT: ViewStyle = {}
 const SECTION: ViewStyle = {
   paddingBottom: spacing[5] * 4,
+  paddingHorizontal: spacing[4],
 }
 
 const TITLE: TextStyle = {
@@ -42,8 +43,8 @@ const CHECK_BOX: ViewStyle = {
 
 const END_BUTTON: ViewStyle = {
   bottom: spacing[5],
-  left: spacing[7],
-  right: spacing[7],
+  left: spacing[4],
+  right: spacing[4],
   position: "absolute",
 }
 
@@ -99,16 +100,14 @@ export const ShoppingListScreen: React.FunctionComponent<ShoppingListScreenProps
       <>
         <Header text="Lista de la compra" onPress={goBack} />
         <Screen preset="fixed" style={ROOT}>
-          <Wrapper>
-            <SectionList
-              sections={nextWeekMenu.shoppingList}
-              renderItem={renderItem}
-              renderSectionHeader={renderHeader}
-              extraData={extraData}
-              stickySectionHeadersEnabled={false}
-              contentContainerStyle={SECTION}
-            />
-          </Wrapper>
+          <SectionList
+            sections={nextWeekMenu.shoppingList}
+            renderItem={renderItem}
+            renderSectionHeader={renderHeader}
+            extraData={extraData}
+            stickySectionHeadersEnabled={false}
+            contentContainerStyle={SECTION}
+          />
         </Screen>
         <Button
           status={hasAllIngredients ? "success" : "basic"}

@@ -49,8 +49,8 @@ const FIRST_SUBTITLE: TextStyle = {
 const END_BUTTON: ViewStyle = {
   // marginTop: spacing[4],
   bottom: spacing[5],
-  left: spacing[7],
-  right: spacing[7],
+  left: spacing[4],
+  right: spacing[4],
   position: "absolute",
 }
 
