@@ -16,6 +16,7 @@ import { color, spacing } from "../../theme"
 export interface CookingRecipeScreenProps extends NavigationScreenProps<{}> {}
 
 const ROOT: ViewStyle = {
+  paddingTop: spacing[4],
   // backgroundColor: color.palette.green,
 }
 
@@ -62,7 +63,6 @@ export const CookingRecipeScreen: React.FunctionComponent<CookingRecipeScreenPro
         <Header text="¡A cocinar!" onPress={goBack} />
         <Screen style={ROOT} preset="scroll">
           <Wrapper>
-            <Text style={DESCRIPTION}>{nextWeekMenu.description}</Text>
             <View style={MEAL_LIST}>
               {nextWeekMenu.meals.map(meal => {
                 return <BulletItem key={meal} text={meal}></BulletItem>
