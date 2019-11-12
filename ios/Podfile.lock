@@ -349,6 +349,10 @@ PODS:
     - ReactCommon/jscallinvoker (= 0.61.1)
   - RNCAsyncStorage (1.6.2):
     - React
+  - RNFBAnalytics (6.0.3):
+    - Firebase/Core (~> 6.8.1)
+    - React
+    - RNFBApp
   - RNFBApp (6.0.3):
     - Firebase/Core (~> 6.8.1)
     - React
@@ -414,6 +418,7 @@ DEPENDENCIES:
   - ReactCommon/jscallinvoker (from `../node_modules/react-native/ReactCommon`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
+  - "RNFBAnalytics (from `../node_modules/@react-native-firebase/analytics`)"
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
   - "RNFBCrashlytics (from `../node_modules/@react-native-firebase/crashlytics`)"
@@ -507,6 +512,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-community/async-storage"
+  RNFBAnalytics:
+    :path: "../node_modules/@react-native-firebase/analytics"
   RNFBApp:
     :path: "../node_modules/@react-native-firebase/app"
   RNFBAuth:
@@ -580,6 +587,7 @@ SPEC CHECKSUMS:
   React-RCTVibration: 8be61459e3749d1fb02cf414edd05b3007622882
   ReactCommon: 4fba5be89efdf0b5720e0adb3d8d7edf6e532db0
   RNCAsyncStorage: 60a80e72d95bf02a01cace55d3697d9724f0d77f
+  RNFBAnalytics: d75433ac464f0ac6e5bd1ae7015cb5fb6427e80a
   RNFBApp: 92ae594c85e82e1e68434049b2a37e1f584cf8b9
   RNFBAuth: edc2e5986b92f0dfd0076b312caf7871a1646ed8
   RNFBCrashlytics: 9bd8fb67b139c2555485ee61a8547c17da85f1e8

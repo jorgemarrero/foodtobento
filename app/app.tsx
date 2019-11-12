@@ -16,6 +16,7 @@ import { StorybookUIRoot } from "../storybook"
 import { RootStore, RootStoreProvider, setupRootStore } from "./models/root-store"
 import { BackButtonHandler, exitRoutes, StatefulNavigator } from "./navigation"
 import { ThemeProvider } from "./theme-provider"
+import { bootstrapCollections } from "./utils/bootstrap"
 /**
  * Ignore some yellowbox warnings. Some of these are for deprecated functions
  * that we haven't gotten around to replacing yet.
@@ -52,6 +53,7 @@ const canExit = (routeName: string) => contains(routeName, exitRoutes)
 export const App: React.FunctionComponent<{}> = () => {
   const [rootStore, setRootStore] = useState<RootStore | undefined>(undefined)
   useEffect(() => {
+    bootstrapCollections()
     setupRootStore().then(setRootStore)
   }, [])
 
