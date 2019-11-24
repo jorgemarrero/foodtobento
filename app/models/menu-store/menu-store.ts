@@ -107,10 +107,10 @@ export const MenuStoreModel = types
       })
     },
     get hasNextWeek() {
-      return self.nextWeekMenuId !== ""
+      return this.nextWeekMenu !== undefined
     },
     get hasCurrentWeek() {
-      return self.currentWeekMenuId !== ""
+      return this.currentWeekMenu !== undefined
     },
     get selectedMenu() {
       const id = self.rootStore.navigationStore.getIdParam()
@@ -126,6 +126,7 @@ export const MenuStoreModel = types
   .views(self => ({
     get currentWeekMenuDays() {
       if (!self.hasCurrentWeek) return []
+
       return self.menus
         .find(menu => menu.id === self.currentWeekMenuId)
         .days.sort((a, b) => (a.index > b.index ? 1 : -1))
@@ -193,6 +194,7 @@ export const MenuStoreModel = types
     async getData() {
       const menusSnapshot = await firestore()
         .collection("menus")
+        .where("published", "==", true)
         .get()
       const menus = await Promise.all(
         menusSnapshot.docs.map(async doc => {
