@@ -168,7 +168,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = observer(pro
           </Fragment>
         )}
         <Text category="h4" style={TITLE}>
-          Menús Food to Bento
+          Menús Batch Cooking
         </Text>
         <Text category="p2" style={HINT}>
           Nuevos menús cada semana
