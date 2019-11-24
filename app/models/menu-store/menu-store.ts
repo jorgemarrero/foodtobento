@@ -210,7 +210,7 @@ export const MenuStoreModel = types
           })
           try {
             data.image = await storage()
-              .refFromURL("gs://food-to-bento.appspot.com/menus/calabaza.jpeg")
+              .refFromURL(data.image)
               .getDownloadURL()
           } catch (e) {
             delete data.image
