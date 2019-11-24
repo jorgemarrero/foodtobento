@@ -1,4 +1,5 @@
 import { onSnapshot } from "mobx-state-tree"
+import { omit } from "ramda"
 
 import * as storage from "../../utils/storage"
 import { Environment } from "../environment"
@@ -50,7 +51,15 @@ export async function setupRootStore() {
   }
 
   // track changes & save to storage
-  onSnapshot(rootStore, snapshot => storage.save(ROOT_STATE_STORAGE_KEY, snapshot))
+  onSnapshot(rootStore, snapshot => {
+    const blackList: string[] = []
+
+    if (!__DEV__) {
+      blackList.push("navigationStore")
+    }
+
+    return storage.save(ROOT_STATE_STORAGE_KEY, omit(blackList, snapshot))
+  })
 
   return rootStore
 }
