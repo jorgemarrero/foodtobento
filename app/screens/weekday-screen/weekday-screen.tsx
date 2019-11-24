@@ -62,9 +62,9 @@ export const WeekdayScreen: React.FunctionComponent<WeekdayScreenProps> = observ
 
   const meal = mealById(selectedDay.lunch.mealRef.id)
 
-  let actualIngredientsWeekday: string[]
-  let actualMinutes: number
-  let actualSteps: string[]
+  let actualIngredientsWeekday: string[] = []
+  let actualMinutes = 0
+  let actualSteps: string[] = []
 
   if (meal) {
     actualIngredientsWeekday = meal.ingredientsWeekday
