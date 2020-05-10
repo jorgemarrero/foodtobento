@@ -50,7 +50,7 @@ command -v yarn >/dev/null 2>&1 || {
 command -v react-native >/dev/null 2>&1 || {
   echo "This app requires react-native-cli, but it was not found on your system."
   echo "Installing react-native-cli globally with yarn..."
-  yarn global add react-native-cli
+  #yarn global add react-native-cli
 }
 
 # IF NEEDED: Ensure appleSimUtils is installed
