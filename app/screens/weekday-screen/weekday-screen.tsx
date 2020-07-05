@@ -1,7 +1,7 @@
+import { useNavigation } from "@react-navigation/native"
 import { observer } from "mobx-react-lite"
-import React, { useEffect } from "react"
+import React, { FunctionComponent as Component, useEffect } from "react"
 import { TextStyle, View, ViewStyle } from "react-native"
-import { NavigationScreenProps } from "react-navigation"
 
 import { BulletItem } from "../../components/bullet-item"
 import { Header } from "../../components/header"
@@ -47,13 +47,17 @@ const TIME: TextStyle = {
   color: color.dim,
 }
 
-export const WeekdayScreen: React.FunctionComponent<WeekdayScreenProps> = observer(props => {
+export const WeekdayScreen: Component = observer(props => {
+  const { navigation, route } = props
   const {
-    menuStore: { selectedDay },
+    menuStore: { getSelectedDay },
     mealStore: { getMeal, mealById },
   } = useStores()
-  const goBack = React.useMemo(() => () => props.navigation.goBack(), [props.navigation])
+
+  const { id } = route?.params || {}
+  const goBack = React.useMemo(() => () => navigation.goBack(), [navigation])
   const active = true
+  const selectedDay = getSelectedDay(id)
 
   useEffect(() => {
     getMeal(selectedDay.lunch.mealRef)

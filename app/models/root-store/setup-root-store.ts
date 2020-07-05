@@ -55,7 +55,6 @@ export async function setupRootStore() {
     const blackList: string[] = []
 
     if (!__DEV__) {
-      blackList.push("navigationStore")
     }
 
     return storage.save(ROOT_STATE_STORAGE_KEY, omit(blackList, snapshot))

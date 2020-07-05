@@ -1,4 +1,4 @@
-import { ConservationModel, Conservation } from "./conservation"
+import { Conservation, ConservationModel } from "./conservation"
 
 test("can be created", () => {
   const instance: Conservation = ConservationModel.create({})

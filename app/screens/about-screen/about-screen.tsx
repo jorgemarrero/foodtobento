@@ -1,7 +1,7 @@
+import { useNavigation } from "@react-navigation/native"
 import { observer } from "mobx-react-lite"
 import React from "react"
 import { TextStyle, ViewStyle } from "react-native"
-import { NavigationScreenProps } from "react-navigation"
 
 import { Header } from "../../components/header"
 import { Screen } from "../../components/screen"
@@ -9,8 +9,6 @@ import { Text } from "../../components/text"
 import { Wrapper } from "../../components/wrapper"
 // import { useStores } from "../../models/root-store"
 import { spacing } from "../../theme"
-
-export interface AboutScreenProps extends NavigationScreenProps<{}> {}
 
 const ROOT: ViewStyle = {
   // backgroundColor: color.palette.green,
@@ -21,9 +19,10 @@ const TITLE: TextStyle = {
   paddingBottom: spacing[3],
 }
 
-export const AboutScreen: React.FunctionComponent<AboutScreenProps> = observer(props => {
+export const AboutScreen: React.FunctionComponent = observer(props => {
   // const { someStore } = useStores()
-  const goBack = React.useMemo(() => () => props.navigation.goBack(), [props.navigation])
+  const navigation = useNavigation()
+  const goBack = React.useMemo(() => () => navigation.goBack(), [navigation])
 
   return (
     <>

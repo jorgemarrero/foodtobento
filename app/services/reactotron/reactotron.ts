@@ -4,6 +4,7 @@ import { mst } from "reactotron-mst"
 import Tron from "reactotron-react-native"
 
 import { RootStore } from "../../models/root-store/root-store"
+import { RootNavigation } from "../../navigation"
 import { clear } from "../../utils/storage"
 import { DEFAULT_REACTOTRON_CONFIG, ReactotronConfig } from "./reactotron-config"
 
@@ -151,12 +152,22 @@ export class Reactotron {
       })
 
       Tron.onCustomCommand({
-        title: "Reset Navigation Store",
-        description: "Resets the navigation store",
+        title: "Reset Navigation State",
+        description: "Resets the navigation state",
         command: "resetNavigation",
         handler: () => {
-          console.tron.log("resetting navigation store")
-          this.rootStore.navigationStore.reset()
+          console.tron.log("resetting navigation state")
+          RootNavigation.resetRoot({ routes: [] })
+        },
+      })
+
+      Tron.onCustomCommand({
+        title: "Go Back",
+        description: "Goes back",
+        command: "goBack",
+        handler: () => {
+          console.tron.log("Going back")
+          RootNavigation.goBack()
         },
       })
 

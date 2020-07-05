@@ -112,8 +112,7 @@ export const MenuStoreModel = types
     get hasCurrentWeek() {
       return this.currentWeekMenu !== undefined
     },
-    get selectedMenu() {
-      const id = self.rootStore.navigationStore.getIdParam()
+    getSelectedMenu(id: string) {
       return self.menus.find(menu => menu.id === id)
     },
     get nextWeekMenu() {
@@ -140,8 +139,7 @@ export const MenuStoreModel = types
           }
         })
     },
-    get selectedDay() {
-      const id = self.rootStore.navigationStore.getIdParam()
+    getSelectedDay(id: string) {
       if (!self.hasCurrentWeek) return null
       return self.currentWeekMenu.days.find(day => day.id === id)
     },

@@ -4,7 +4,7 @@ import * as React from "react"
 import { Story, StoryScreen, UseCase } from "../../../storybook/views"
 import { Wallpaper } from "./wallpaper"
 
-declare var module
+declare let module
 
 storiesOf("Wallpaper", module)
   .addDecorator(fn => <StoryScreen>{fn()}</StoryScreen>)

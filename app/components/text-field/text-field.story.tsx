@@ -10,7 +10,7 @@ import { Story, StoryScreen, UseCase } from "../../../storybook/views"
 import { Text } from "../text"
 import { TextField } from "./"
 
-declare var module
+declare let module
 
 const styleArray: ViewStyle[] = [{ paddingHorizontal: 30 }, { borderWidth: 30 }]
 
@@ -26,7 +26,7 @@ const inputStyleArray: TextStyle[] = [
     borderColor: "#7fff00",
   },
 ]
-var alertWhenFocused = true
+let alertWhenFocused = true
 
 storiesOf("TextField", module)
   .addDecorator(fn => <StoryScreen>{fn()}</StoryScreen>)

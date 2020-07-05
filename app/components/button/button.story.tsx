@@ -5,7 +5,7 @@ import { Alert, TextStyle, ViewStyle } from "react-native"
 import { Story, StoryScreen, UseCase } from "../../../storybook/views"
 import { Button } from "./"
 
-declare var module
+declare let module
 
 const buttonStyleArray: ViewStyle[] = [{ paddingVertical: 100 }, { borderRadius: 0 }]
 

@@ -77,7 +77,9 @@ export const Switch: React.FunctionComponent<SwitchProps> = props => {
     }
   }, [previousValue, props.value, startAnimation])
 
-  const handlePress = React.useMemo(() => () => props.onToggle && props.onToggle(!props.value), [props])
+  const handlePress = React.useMemo(() => () => props.onToggle && props.onToggle(!props.value), [
+    props,
+  ])
 
   if (!timer) {
     return null

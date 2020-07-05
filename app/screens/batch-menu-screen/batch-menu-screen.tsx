@@ -1,8 +1,9 @@
+import { useNavigation } from "@react-navigation/native"
 import { observer } from "mobx-react-lite"
-import * as React from "react"
+import React, { FunctionComponent as Component } from "react"
 import { TextStyle, View, ViewStyle } from "react-native"
 import { Button } from "react-native-ui-kitten"
-import { NavigationScreenProps } from "react-navigation"
+import reactotron from "reactotron-react-native"
 
 import { BulletItem } from "../../components/bullet-item"
 import { Header } from "../../components/header"
@@ -11,8 +12,6 @@ import { Text } from "../../components/text"
 import { Wrapper } from "../../components/wrapper"
 import { useStores } from "../../models/root-store"
 import { color, spacing } from "../../theme"
-
-export interface BatchMenuScreenProps extends NavigationScreenProps<{}> {}
 
 const ROOT: ViewStyle = {
   // backgroundColor: color.palette.green,
@@ -58,11 +57,15 @@ const BUTTON_TEXT: TextStyle = {
   textAlign: "center",
 }
 
-export const BatchMenuScreen: React.FunctionComponent<BatchMenuScreenProps> = observer(props => {
-  const goBack = React.useMemo(() => () => props.navigation.goBack(), [props.navigation])
+export const BatchMenuScreen: Component = observer(props => {
+  const { navigation, route } = props
   const {
-    menuStore: { selectedMenu, setNextWeek },
+    menuStore: { getSelectedMenu, setNextWeek },
   } = useStores()
+
+  const { id } = route?.params || {}
+  const goBack = React.useMemo(() => () => navigation.goBack(), [navigation])
+  const selectedMenu = getSelectedMenu(id)
 
   function handleOnPress() {
     setNextWeek(selectedMenu.id)

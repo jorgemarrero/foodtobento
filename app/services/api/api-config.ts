@@ -1,4 +1,4 @@
-import { API_URL } from "react-native-dotenv"
+const { API_URL } = require("../../config/env")
 
 /**
  * The options used to configure the API.

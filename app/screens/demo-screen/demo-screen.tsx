@@ -1,6 +1,6 @@
-import * as React from "react"
+import { useNavigation } from "@react-navigation/native"
+import React, { FunctionComponent as Component } from "react"
 import { Image, ImageStyle, Platform, TextStyle, View, ViewStyle } from "react-native"
-import { NavigationScreenProps } from "react-navigation"
 
 import { BulletItem } from "../../components/bullet-item"
 import { Button } from "../../components/button"
@@ -81,10 +81,9 @@ const HINT: TextStyle = {
   marginVertical: spacing[2],
 }
 
-export interface DemoScreenProps extends NavigationScreenProps<{}> {}
-
-export const DemoScreen: React.FunctionComponent<DemoScreenProps> = props => {
-  const goBack = React.useMemo(() => () => props.navigation.goBack(null), [props.navigation])
+export const DemoScreen: Component = props => {
+  const navigation = useNavigation()
+  const goBack = React.useMemo(() => () => navigation.goBack(), [navigation])
 
   const demoReactotron = React.useMemo(
     () => async () => {

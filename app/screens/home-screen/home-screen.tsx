@@ -1,8 +1,14 @@
+import { useNavigation } from "@react-navigation/native"
 import { observer } from "mobx-react-lite"
-import React, { Fragment, useEffect, useMemo, useState } from "react"
+import React, {
+  Fragment,
+  FunctionComponent as Component,
+  useEffect,
+  useMemo,
+  useState,
+} from "react"
 import { TextStyle, TouchableOpacity, View, ViewStyle } from "react-native"
 import { Button, Icon, Layout, Modal } from "react-native-ui-kitten"
-import { NavigationScreenProps } from "react-navigation"
 
 import { MenuList } from "../../components/menu-list"
 import { MenuProps } from "../../components/menu-list/menu-list.props"
@@ -58,8 +64,9 @@ const MODAL: ViewStyle = {
 
 export interface HomeScreenProps extends NavigationScreenProps<{}> {}
 
-export const HomeScreen: React.FunctionComponent<HomeScreenProps> = observer(props => {
-  const navigateAbout = useMemo(() => () => props.navigation.navigate("about"), [props.navigation])
+export const HomeScreen: Component = observer(props => {
+  const navigation = useNavigation()
+  const navigateAbout = useMemo(() => () => navigation.navigate("about"), [navigation])
 
   const [startWeekModalVisible, setStartWeekModalVisible] = useState(false)
   const {

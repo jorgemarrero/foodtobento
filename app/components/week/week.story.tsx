@@ -68,7 +68,7 @@ export function getWeekList(active: number): WeekdayProps[] {
   return WEEK_LIST.map((day, index) => ({ ...day, active: active === index }))
 }
 
-declare var module
+declare let module
 
 storiesOf("Week", module)
   .addDecorator(fn => <StoryScreen>{fn()}</StoryScreen>)

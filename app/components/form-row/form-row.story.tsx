@@ -10,7 +10,7 @@ import { color } from "../../theme/color"
 import { Text } from "../text"
 import { FormRow } from "./form-row"
 
-declare var module
+declare let module
 
 const TEXT_STYLE_OVERRIDE = {
   color: color.storybookTextColor,

@@ -6,7 +6,7 @@ import { color } from "../../theme"
 import { MenuList } from "."
 import { MenuProps } from "./menu-list.props"
 
-declare var module
+declare let module
 
 export const MENU_LIST: MenuProps[] = [
   {

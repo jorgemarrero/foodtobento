@@ -1,9 +1,10 @@
-import * as React from "react"
 import { storiesOf } from "@storybook/react-native"
-import { StoryScreen, Story, UseCase } from "../../../storybook/views"
+import * as React from "react"
+
+import { Story, StoryScreen, UseCase } from "../../../storybook/views"
 import { Header } from "./"
 
-declare var module
+declare let module
 
 storiesOf("Header", module)
   .addDecorator(fn => <StoryScreen>{fn()}</StoryScreen>)

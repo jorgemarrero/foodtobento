@@ -45,7 +45,7 @@ function getRandomSteps(completed: number[]) {
   return STEPS.map((step, index) => ({ ...step, completed: completed.includes(index + 1) }))
 }
 
-declare var module
+declare let module
 
 storiesOf("ProgressSteps", module)
   .addDecorator(fn => <StoryScreen>{fn()}</StoryScreen>)

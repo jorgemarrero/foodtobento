@@ -5,7 +5,7 @@ import { Alert } from "react-native"
 import { Story, StoryScreen, UseCase } from "../../../storybook/views"
 import { Weekday } from "./"
 
-declare var module
+declare let module
 
 storiesOf("Weekday", module)
   .addDecorator(fn => <StoryScreen>{fn()}</StoryScreen>)

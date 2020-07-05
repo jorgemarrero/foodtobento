@@ -1,95 +1,87 @@
-// Welcome to the main entry point of the app.
-//
-// In this file, we'll be kicking off our app or storybook.
+/**
+ * Welcome to the main entry point of the app. In this file, we'll
+ * be kicking off our app or storybook.
+ *
+ * Most of this file is boilerplate and you shouldn't need to modify
+ * it very often. But take some time to look through and understand
+ * what is going on here.
+ *
+ * The app navigation resides in ./app/navigation, so head over there
+ * if you're interested in adding screens and navigators.
+ */
 
 import "./i18n"
-import "./utils/fixAndroidFont"
+import "./utils/ignore-warnings"
+import "./utils/fixAndroidFont" // TODO: CHeck this
 // TODO: REMOVE THIS IMPORT. IT'S A TEMPORAL FIX OF react-native-gesture-handler.
 // Read more in this issue https://github.com/kmagiera/react-native-gesture-handler/issues/746#issuecomment-537562738
 import "react-native-gesture-handler"
 
-import { contains } from "ramda"
-import React, { useEffect, useState } from "react"
-import { AppRegistry, YellowBox } from "react-native"
+import { NavigationContainerRef } from "@react-navigation/native"
+import React, { FunctionComponent as Component, useEffect, useRef, useState } from "react"
+import { initialWindowSafeAreaInsets, SafeAreaProvider } from "react-native-safe-area-context"
+// This puts screens in a native ViewController or Activity. If you want fully native
+// stack navigation, use `createNativeStackNavigator` in place of `createStackNavigator`:
+// https://github.com/kmagiera/react-native-screens#using-native-stack-navigator
+import { enableScreens } from "react-native-screens"
 
-import { StorybookUIRoot } from "../storybook"
 import { RootStore, RootStoreProvider, setupRootStore } from "./models/root-store"
-import { BackButtonHandler, exitRoutes, StatefulNavigator } from "./navigation"
+import {
+  canExit,
+  RootNavigator,
+  setRootNavigation,
+  useBackButtonHandler,
+  useNavigationPersistence,
+} from "./navigation"
 import { ThemeProvider } from "./theme-provider"
 import { bootstrapCollections } from "./utils/bootstrap"
-/**
- * Ignore some yellowbox warnings. Some of these are for deprecated functions
- * that we haven't gotten around to replacing yet.
- */
-YellowBox.ignoreWarnings([
-  "componentWillMount is deprecated",
-  "componentWillReceiveProps is deprecated",
-])
+import * as storage from "./utils/storage"
+enableScreens()
 
-/**
- * Storybook still wants to use ReactNative's AsyncStorage instead of the
- * react-native-community package; this causes a YellowBox warning. This hack
- * points RN's AsyncStorage at the community one, fixing the warning. Here's the
- * Storybook issue about this: https://github.com/storybookjs/storybook/issues/6078
- */
-const ReactNative = require("react-native")
-Object.defineProperty(ReactNative, "AsyncStorage", {
-  get(): any {
-    return require("@react-native-community/async-storage").default
-  },
-})
-
-/**
- * Are we allowed to exit the app?  This is called when the back button
- * is pressed on android.
- *
- * @param routeName The currently active route name.
- */
-const canExit = (routeName: string) => contains(routeName, exitRoutes)
+export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
 
 /**
  * This is the root component of our app.
  */
-export const App: React.FunctionComponent<{}> = () => {
+const App: Component<{}> = () => {
+  const navigationRef = useRef<NavigationContainerRef>()
   const [rootStore, setRootStore] = useState<RootStore | undefined>(undefined)
+
+  setRootNavigation(navigationRef)
+  useBackButtonHandler(navigationRef, canExit)
+  const { initialNavigationState, onNavigationStateChange } = useNavigationPersistence(
+    storage,
+    NAVIGATION_PERSISTENCE_KEY,
+  )
+
+  // Kick off initial async loading actions, like loading fonts and RootStore
   useEffect(() => {
-    bootstrapCollections()
-    setupRootStore().then(setRootStore)
+    ;(async () => {
+      bootstrapCollections()
+      setupRootStore().then(setRootStore)
+    })()
   }, [])
 
   // Before we show the app, we have to wait for our state to be ready.
   // In the meantime, don't render anything. This will be the background
-  // color set in native by rootView's background color.
-  //
-  // This step should be completely covered over by the splash screen though.
-  //
-  // You're welcome to swap in your own component to render if your boot up
-  // sequence is too slow though.
-  if (!rootStore) {
-    return null
-  }
+  // color set in native by rootView's background color. You can replace
+  // with your own loading component if you wish.
+  if (!rootStore) return null
 
   // otherwise, we're ready to render the app
   return (
     <RootStoreProvider value={rootStore}>
-      <BackButtonHandler canExit={canExit}>
+      <SafeAreaProvider initialSafeAreaInsets={initialWindowSafeAreaInsets}>
         <ThemeProvider>
-          <StatefulNavigator />
+          <RootNavigator
+            ref={navigationRef}
+            initialState={initialNavigationState}
+            onStateChange={onNavigationStateChange}
+          />
         </ThemeProvider>
-      </BackButtonHandler>
+      </SafeAreaProvider>
     </RootStoreProvider>
   )
 }
 
-/**
- * This needs to match what's found in your app_delegate.m and MainActivity.java.
- */
-const APP_NAME = "foodtobento"
-
-// Should we show storybook instead of our app?
-//
-// ⚠️ Leave this as `false` when checking into git.
-const SHOW_STORYBOOK = false
-
-const RootComponent = SHOW_STORYBOOK && __DEV__ ? StorybookUIRoot : App
-AppRegistry.registerComponent(APP_NAME, () => RootComponent)
+export default App

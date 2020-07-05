@@ -8,8 +8,8 @@ import {
   ViewStyle,
 } from "react-native"
 import LinearGradient from "react-native-linear-gradient"
+import { useSafeArea } from "react-native-safe-area-context"
 import { styled } from "react-native-ui-kitten"
-import { SafeAreaView } from "react-navigation"
 
 import { color } from "../../theme"
 import { isNonScrolling, offsets, presets } from "./screen.presets"
@@ -29,11 +29,12 @@ const GRADIENT: ViewStyle = {
 }
 
 function ScreenWithoutScrolling(props: ScreenProps) {
+  const insets = useSafeArea()
   const preset = presets.fixed
   const style = props.style || {}
   const themedStyle = props.themedStyle || {}
   const backgroundStyle = props.backgroundColor ? { backgroundColor: props.backgroundColor } : {}
-  const Wrapper = props.unsafe ? View : SafeAreaView
+  const insetStyle = { paddingTop: props.unsafe ? 0 : insets.top }
 
   return (
     <KeyboardAvoidingView
@@ -45,17 +46,18 @@ function ScreenWithoutScrolling(props: ScreenProps) {
         barStyle={props.statusBar || "light-content"}
         backgroundColor={color.storybookDarkBg}
       />
-      <Wrapper style={[themedStyle, preset.inner, style]}>{props.children}</Wrapper>
+      <View style={[themedStyle, preset.inner, style, insetStyle]}>{props.children}</View>
     </KeyboardAvoidingView>
   )
 }
 
 function ScreenWithScrolling(props: ScreenProps) {
+  const insets = useSafeArea()
   const preset = presets.scroll
   const style = props.style || {}
   const themedStyle = props.themedStyle || {}
   const backgroundStyle = props.backgroundColor ? { backgroundColor: props.backgroundColor } : {}
-  const Wrapper = props.unsafe ? View : SafeAreaView
+  const insetStyle = { paddingTop: props.unsafe ? 0 : insets.top }
 
   return (
     <KeyboardAvoidingView
@@ -67,14 +69,14 @@ function ScreenWithScrolling(props: ScreenProps) {
         barStyle={props.statusBar || "light-content"}
         backgroundColor={color.storybookDarkBg}
       />
-      <Wrapper style={[preset.outer, backgroundStyle]}>
+      <View style={[preset.outer, backgroundStyle, insetStyle]}>
         <ScrollView
           style={[preset.outer, backgroundStyle]}
           contentContainerStyle={[themedStyle, preset.inner, style]}
         >
           {props.children}
         </ScrollView>
-      </Wrapper>
+      </View>
     </KeyboardAvoidingView>
   )
 }

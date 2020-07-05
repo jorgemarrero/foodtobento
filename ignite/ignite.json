@@ -1,6 +1,7 @@
 {
+  "navigation": "react-navigation",
   "generators": {},
-  "createdWith": "3.1.6",
+  "createdWith": "3.5.1",
   "boilerplate": "ignite-bowser",
-  "boilerplateVersion": "4.7.1"
+  "boilerplateVersion": "5.1.1"
 }
