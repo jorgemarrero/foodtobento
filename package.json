@@ -105,7 +105,6 @@
     "prettier": "1.19.1",
     "prettier-eslint": "^11.0.0",
     "react-devtools-core": "4.7.0",
-    "react-native-dotenv": "^0.2.0",
     "react-powerplug": "1.0.0",
     "react-test-renderer": "16.13.1",
     "rimraf": "3.0.2",
