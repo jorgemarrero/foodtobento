@@ -36,7 +36,7 @@ export const AboutScreen: React.FunctionComponent = observer(props => {
           <Text text="Es ahorrar tiempo. Pensar cada día lo que vamos a comer nos quita mucho tiempo, eso sin contar con ir a la compra y cocinar." />
           <Text text="Es comer sano. Establecer un plan de comidas semanal equilibrado nos evita recurrir a lo primero que pillemos en la nevera y nos hace más sencillo llevar una buena dieta." />
           <Text text="Contáctanos" category="h6" style={TITLE} />
-          <Text text="Si tienes alguna duda, sugerencia o nos quieres proner un menú no dudes en contactarnos por e-mail: info@foodtobento.com" />
+          <Text text="Si tienes alguna duda, sugerencia o nos quieres proner un menú no dudes en contactarnos por e-mail: batchcookingapp@gmail.com" />
         </Wrapper>
       </Screen>
     </>
